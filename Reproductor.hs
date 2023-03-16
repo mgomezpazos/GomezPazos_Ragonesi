@@ -18,6 +18,8 @@ temasR :: Reproductor → [Tema]
 --Nos devuelve los temas que tenga el reproductor
 playR :: Reproductor → Etiqueta → Reproductor
 -- QUE?!?!?!?!?!?!
+-- Agus:
+-- ?????
 actualR :: Reproductor →Tema
 -- Tema que se está reproduciendo
 avanzarR :: Reproductor →Reproductor
@@ -26,3 +28,4 @@ retrocederR :: Reproductor →Reproductor
 --Retrocede
 reiniciarR :: Reproductor →Reproductor
 --Volvemos al inicio del reproductor o llimpia todo el reproductor o nos crea unn reproductor idéntico nuevo.
+-- resetea la playlist
