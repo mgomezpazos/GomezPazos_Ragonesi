@@ -17,9 +17,8 @@ listaParaR :: Etiqueta → Reproductor →[Tema]
 temasR :: Reproductor → [Tema]
 --Nos devuelve los temas que tenga el reproductor
 playR :: Reproductor → Etiqueta → Reproductor
--- QUE?!?!?!?!?!?!
--- Agus:
--- ?????
+-- QUE?!? 
+-- le paso un reproductor con una etiqueta y me devuelve los temas de esa etiqueta
 actualR :: Reproductor →Tema
 -- Tema que se está reproduciendo
 avanzarR :: Reproductor →Reproductor

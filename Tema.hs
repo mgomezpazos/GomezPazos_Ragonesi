@@ -4,7 +4,7 @@ import Tipos
 data Tema = Tem Nombre [ Etiqueta ] Datos deriving (Eq, Show, Ord)
 --El tipo Datos representa la secuencia de datos que conforma el archivo mp3
 {-
-Agus: 
+ 
 nombres, [etiqueta], datos son strings, hay que pensarlos como un ALIAS. No son mas que strings
 Tem es el constructor, me va a construir un tipo de dato Tema.
 Para construir un valor con Tem, tengo que pasarle 3 elementos. Nombre [Etiqueta] Datos

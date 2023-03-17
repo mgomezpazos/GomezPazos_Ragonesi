@@ -17,7 +17,7 @@ filtrarF :: Etiqueta → FileSystem → [ Tema ]
 
 {-
 
-Agus:
+
 FileSystem (lo del tema de que era privado)
 
 A lo que se referia Emilio era, que podemos construir cosas sin el constructor.
