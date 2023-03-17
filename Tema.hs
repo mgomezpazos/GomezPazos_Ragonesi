@@ -1,7 +1,8 @@
 module Tema (Tema, nuevoT, nombreT, datosT, etiquetasT, agregarT, aplicaT)
     where
+
 import Tipos
-data Tema = Tem Nombre [ Etiqueta ] Datos deriving (Eq, Show, Ord)
+data Tema = Tem Nombre [Etiqueta] Datos deriving (Eq,Show, Ord)
 --El tipo Datos representa la secuencia de datos que conforma el archivo mp3
 {-
  
@@ -11,8 +12,9 @@ Para construir un valor con Tem, tengo que pasarle 3 elementos. Nombre [Etiqueta
 Como la función no recibe Etiqueta, le puedo pasar listas con cero elementos
 tema_1 = Tem(Nombre [Etiqueta] Datos)
 -}
-nuevoT :: Nombre → Datos → Tema 
-nuevoT Nombre Datos = Tem Nombre [] Datos
+nuevoT :: Nombre -> Datos -> Tema 
+nuevoT nombre datos = Tem nombre [] datos
+--nuevoT2 = Tem
 --nombreT :: Tema → Nombre
 --datosT :: Tema → Datos
 --etiquetasT :: Tema → [ Etiqueta ]

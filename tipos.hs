@@ -1,6 +1,7 @@
-module Tipos (insertar)
+module Tipos
     where
 import Data.List (sort)
+
 type Datos = String
 type Etiqueta = String
 type Nombre = String
