@@ -12,11 +12,11 @@ Como la función no recibe Etiqueta, le puedo pasar listas con cero elementos
 tema_1 = Tem(Nombre [Etiqueta] Datos)
 -}
 nuevoT :: Nombre → Datos → Tema 
---nuevoT cancion datos = Tem cancion datos 
-nombreT :: Tema → Nombre
-datosT :: Tema → Datos
-etiquetasT :: Tema → [ Etiqueta ]
-agregarT :: Etiqueta → Tema →Tema
-aplicaT :: Etiqueta →Tema →Bool --nos dice si esa etiqueta ya pertenece al tema
+nuevoT Nombre Datos = Tem Nombre [] Datos
+--nombreT :: Tema → Nombre
+--datosT :: Tema → Datos
+--etiquetasT :: Tema → [ Etiqueta ]
+--agregarT :: Etiqueta → Tema →Tema
+--aplicaT :: Etiqueta →Tema →Bool --nos dice si esa etiqueta ya pertenece al tema
 
 --generar las 6 funciones
