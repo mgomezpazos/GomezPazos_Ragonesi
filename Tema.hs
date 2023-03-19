@@ -12,18 +12,18 @@ Para construir un valor con Tem, tengo que pasarle 3 elementos. Nombre [Etiqueta
 Como la función no recibe Etiqueta, le puedo pasar listas con cero elementos
 tema_1 = Tem(Nombre [Etiqueta] Datos)
 -}
+--nuevoT2 = Tem
 nuevoT :: Nombre -> Datos -> Tema 
 nuevoT nombre datos = Tem nombre [] datos
---nuevoT2 = Tem
+--nombreT :: Tema → Nombre
 nombreT :: Tema -> Nombre
 nombreT (Tem nombre _ _) = nombre
---nombreT :: Tema → Nombre
+--datosT :: Tema → Datos
 datosT :: Tema -> Datos
 datosT (Tem _ _ datos) = datos
---datosT :: Tema → Datos
+--etiquetasT :: Tema → [ Etiqueta ]
 etiquetasT :: Tema -> [Etiqueta]
 etiquetasT (Tem _ [etiqueta] _) = [etiqueta] 
---etiquetasT :: Tema → [ Etiqueta ]
 --agregarT :: Etiqueta → Tema →Tema
 --aplicaT :: Etiqueta →Tema →Bool --nos dice si esa etiqueta ya pertenece al tema
 
