@@ -1,4 +1,4 @@
-module Tema (Tema, nuevoT, nombreT, datosT, etiquetasT, agregarT, aplicaT)
+module Tema (Tema, nuevoT, nombreT, datosT, etiquetasT, {-agregarT, aplicaT-})
     where
 
 import Tipos
@@ -24,7 +24,9 @@ datosT (Tem _ _ datos) = datos
 --etiquetasT :: Tema → [ Etiqueta ]
 etiquetasT :: Tema -> [Etiqueta]
 etiquetasT (Tem _ [etiqueta] _) = [etiqueta] 
---agregarT :: Etiqueta → Tema →Tema
---aplicaT :: Etiqueta →Tema →Bool --nos dice si esa etiqueta ya pertenece al tema
 
---generar las 6 funciones
+-- FUNCIONES PENDIENTES:
+--agregarT :: Etiqueta -> Tema -> Tema
+--agregarT etiqueta (Tem nombre [etiquetas] datos) = Tem nombre (etiqueta ++ [etiquetas]) datos
+--aplicaT :: Etiqueta -> Tema -> Bool --nos dice si esa etiqueta ya pertenece al tema
+--aplicaT etiqueta (Tem _ [etiquetas] _) = elem etiqueta [etiquetas]
