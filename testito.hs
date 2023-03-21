@@ -1,4 +1,4 @@
-module Tema (Tema, {-nuevoT nombreT,-})
+module Tema (Tema, {-nuevoT nombreT-})
     where
 
 import Tipos
@@ -16,4 +16,4 @@ tema_1 = Tem(Nombre [Etiqueta] Datos)
 --nuevoT nombre datos = Tem nombre [] datos
 
 --nombreT :: Tema -> Nombre
--- nombreT (Tem nombre _ _) = nombre
+--nombreT (Tem nombre _ _) = nombre
