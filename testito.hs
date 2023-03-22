@@ -1,4 +1,4 @@
-module Tema (Tema, {-nuevoT nombreT-})
+module Tema (Tema) --aplicaT, agregarT, nuevoT nombreT,etiquetasT)
     where
 
 import Tipos
@@ -17,3 +17,11 @@ tema_1 = Tem(Nombre [Etiqueta] Datos)
 
 --nombreT :: Tema -> Nombre
 --nombreT (Tem nombre _ _) = nombre
+
+--etiquetasT :: Tema -> [Etiqueta]
+--etiquetasT (Tem _ [etiqueta] _) = [etiqueta] 
+--agregarT :: Etiqueta -> Tema -> Tema
+--agregarT etiqueta (Tem nombre etiquetas datos) = Tem nombre (etiquetas ++ [etiqueta]) datos
+
+--aplicaT :: Etiqueta -> Tema -> Bool --nos dice si esa etiqueta ya pertenece al tema
+--aplicaT etiqueta (Tem _ etiquetas _) = etiqueta `elem` etiquetas
