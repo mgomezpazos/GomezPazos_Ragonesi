@@ -1,8 +1,8 @@
-module Tema (Tema) --aplicaT, agregarT, nuevoT nombreT,etiquetasT)
-    where
+{-module Tema (Tema) --aplicaT, agregarT, nuevoT nombreT,etiquetasT)
+   where
 
 import Tipos
-data Tema = Tem Nombre [Etiqueta] Datos deriving (Eq,Show, Ord)
+data Tema = Tem Nombre [Etiqueta] Datos deriving (Eq,Show, Ord)-}
 --El tipo Datos representa la secuencia de datos que conforma el archivo mp3
 {-
  
@@ -25,3 +25,12 @@ tema_1 = Tem(Nombre [Etiqueta] Datos)
 
 --aplicaT :: Etiqueta -> Tema -> Bool --nos dice si esa etiqueta ya pertenece al tema
 --aplicaT etiqueta (Tem _ etiquetas _) = etiqueta `elem` etiquetas
+
+module FileSystem (FileSystem, nuevoF)
+    where
+import Tipos 
+import Tema 
+data FileSystem = FS [Etiqueta] [Tema] deriving (Eq, Show)
+
+nuevoF :: FileSystem --Crea un nuevo FileSystem con sus listas vacias. (Crea una lista de listas vacías)
+nuevoF = FS [] []
