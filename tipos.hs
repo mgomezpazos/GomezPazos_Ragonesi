@@ -10,7 +10,7 @@ type Nombre = String
 insertar :: Ord a => a -> [a] -> [a] 
 --que entrega una nueva lista con los elementos originales y el agregado ordenados naturalmente.
 --insertar x xs  = [flip(x : xs)]
-insertar elemento lista = sort(reverse(elemento:reverse(lista)))
+insertar elemento lista = sort(reverse(elemento:reverse lista))
 
 --(+++) xs = foldr pegarAtras xs . reverse
 
