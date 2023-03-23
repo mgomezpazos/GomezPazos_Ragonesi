@@ -30,3 +30,9 @@ agregarT etiqueta (Tem nombre etiquetas datos) = Tem nombre (etiquetas ++ [etiqu
 
 aplicaT :: Etiqueta -> Tema -> Bool --nos dice si esa etiqueta ya pertenece al tema
 aplicaT etiqueta (Tem _ etiquetas _) = etiqueta `elem` etiquetas
+
+
+t = [
+    nuevoT "a" "b" == Tem "a" [] "b"
+
+    ]
