@@ -5,11 +5,11 @@ import Tema
 data FileSystem = FS [Etiqueta] [Tema] deriving (Eq, Show)
 
 nuevoF :: FileSystem --Crea un nuevo FileSystem con sus listas vacias. (Crea una lista de listas vacías)
-nuevoF = FS [] [] --no sé si está bien porque no me gusta como se imprime
+nuevoF = FS [] [] --no sé si está bien porque no me gusta como se imprime CHECKED
 etiquetasF :: FileSystem -> [ Etiqueta ] --Crea la lista de etiquetas
-etiquetasF (FS etiqueta tema) = etiqueta
+etiquetasF (FS etiqueta tema) = etiqueta -- CHECKED!!!
 temasF :: FileSystem -> [ Tema ] --Crea la listas de temas
-temasF (FS _ [nuevoT]) = [nuevoT]
+temasF (FS _ tema) = tema
 agregarF :: Tema -> FileSystem -> FileSystem --Agrega el tema y sus etiquetas de ser necesario.
 agregarF nuevoT (FS etiqueta tema) = FS etiqueta (nuevoT : tema)
 -- agregarT :: Etiqueta -> Tema -> Tema
