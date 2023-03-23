@@ -7,7 +7,7 @@ data FileSystem = FS [Etiqueta] [Tema] deriving (Eq, Show)
 nuevoF :: FileSystem --Crea un nuevo FileSystem con sus listas vacias. (Crea una lista de listas vacías)
 nuevoF = FS [] [] --no sé si está bien porque no me gusta como se imprime
 etiquetasF :: FileSystem -> [ Etiqueta ] --Crea la lista de etiquetas
-etiquetasF (FS etiqueta [nuevoT]) = etiqueta
+etiquetasF (FS etiqueta tema) = etiqueta
 temasF :: FileSystem -> [ Tema ] --Crea la listas de temas
 temasF (FS _ [nuevoT]) = [nuevoT]
 agregarF :: Tema -> FileSystem -> FileSystem --Agrega el tema y sus etiquetas de ser necesario.
