@@ -26,11 +26,12 @@ tema_1 = Tem(Nombre [Etiqueta] Datos)
 --aplicaT :: Etiqueta -> Tema -> Bool --nos dice si esa etiqueta ya pertenece al tema
 --aplicaT etiqueta (Tem _ etiquetas _) = etiqueta `elem` etiquetas
 
-module FileSystem (FileSystem, temasF)--etiquetasF)--nuevoF)
+{-module FileSystem (FileSystem, temasF)--etiquetasF)--nuevoF)
     where
 import Tipos 
 import Tema 
-data FileSystem = FS [Etiqueta] [Tema] deriving (Eq, Show)
+import -}
+--data FileSystem = FS [Etiqueta] [Tema] deriving (Eq, Show)
 
 --nuevoF :: FileSystem --Crea un nuevo FileSystem con sus listas vacias. (Crea una lista de listas vacías)
 --nuevoF = FS [] []
@@ -38,3 +39,25 @@ data FileSystem = FS [Etiqueta] [Tema] deriving (Eq, Show)
 --etiquetasF (FS etiqueta [nuevoT]) = etiqueta --no funca
 -- temasF :: FileSystem -> [ Tema ] --Crea la listas de temas
 -- temasF (FS _ [nuevoT]) = [nuevoT]
+
+module Reproductor ( Reproductor, nuevoR, archivosR{-}, listaParaR, temasR, playR, actualR, avanzarR, retrocederR,
+reiniciarR -})
+    where
+import Tipos
+import Tema
+import Playlist
+import FileSystem
+
+data Reproductor = RP FileSystem Playlist deriving (Eq, Show)
+
+nuevoR :: FileSystem -> Playlist -> Reproductor
+--nuevoR = RP
+nuevoR nuevoF nuevaP = RP nuevoF nuevaP
+-- PRUEBA, ASI HAY QUE PASARLO PARA QUE ANDE!!!
+--nuevoR nuevoF(nuevaP[(nuevoT "Despacito" "des-pa-cito")]) 
+
+archivosR :: Reproductor -> FileSystem
+--archivosR nuevoR = RP nuevoF _
+archivosR (RP nuevoF nuevaP) = nuevoF 
+-- PRUEBA, ASI HAY QUE PASARLO PARA QUE FUNCIONE BIEN!!
+-- archivosR (RP nuevoF (nuevaP[(nuevoT "Despacito" "des-pa-cito")]))
