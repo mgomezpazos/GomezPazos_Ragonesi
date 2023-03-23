@@ -7,7 +7,7 @@ data Playlist = Play Int [ Tema ] deriving (Eq, Show) --Una Playlist tiene una l
 --partir de una lista de temas crea una nueva Playlist con su ´ındice en cero. (Crea la Playlist)
 nuevaP :: [ Tema ] -> Playlist
 --nuevaP [nuevoT] = Play 0 [nuevoT]
-nuevaP [temas] = Play 0 [temas] -- tested!!
+nuevaP = Play 0 -- tested!!
 --Dada una Playlist devuelve el tema en la posici´on indicada por el ´ındice. (Le pasamos el nombre de la playlist y el indice y nos devuelve la canción)
 actualP :: Playlist -> Tema
 --actualP (Play num [nuevoT] ) = [nuevoT] !! num
