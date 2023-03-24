@@ -32,7 +32,6 @@ filtrarF :: Etiqueta -> FileSystem -> [Tema]
 filtrarF etiqueta (FS etiquetas temas) = [x | x <- temas, aplicaT etiqueta x]
 {-
 
-
 FileSystem (lo del tema de que era privado)
 
 A lo que se referia Emilio era, que podemos construir cosas sin el constructor.
