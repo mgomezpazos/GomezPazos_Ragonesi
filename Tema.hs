@@ -15,15 +15,15 @@ tema_1 = Tem(Nombre [Etiqueta] Datos)
 --nuevoT2 = Tem 
 nuevoT :: Nombre -> Datos -> Tema 
 nuevoT nombre datos = Tem nombre [] datos
---nombreT :: Tema → Nombre
+
 nombreT :: Tema -> Nombre
 nombreT (Tem nombre _ _) = nombre
---datosT :: Tema → Datos
+
 datosT :: Tema -> Datos
 datosT (Tem _ _ datos) = datos
---etiquetasT :: Tema → [ Etiqueta ]
+
 etiquetasT :: Tema -> [Etiqueta]
-etiquetasT (Tem _ [etiqueta] _) = [etiqueta] 
+etiquetasT (Tem _ etiqueta _) = etiqueta
 
 agregarT :: Etiqueta -> Tema -> Tema
 agregarT etiqueta (Tem nombre etiquetas datos) = Tem nombre (etiquetas ++ [etiqueta]) datos

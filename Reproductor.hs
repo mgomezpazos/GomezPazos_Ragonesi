@@ -9,7 +9,7 @@ import FileSystem
 data Reproductor = RP FileSystem Playlist deriving (Eq, Show)
 
 nuevoR :: FileSystem -> Playlist -> Reproductor
-nuevoR nuevoF nuevaP = RP nuevoF nuevaP
+nuevoR filesystem playlist = RP filesystem plylist
 --nuevoR = RP
 --Crea un nuevo reproductor a partir de un FileSystem y una nueva Playlist con su lista de temas vacia.
 archivosR :: Reproductor -> FileSystem
