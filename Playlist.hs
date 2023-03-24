@@ -19,7 +19,22 @@ skipP (Play songnum temas) = Play (songnum + 1) temas -- tested!!
 --Idem anterior pero con el ´ındice decrementado en uno.
 backP :: Playlist -> Playlist
 --backP (Play num [nuevoT]) = Play (num - 1) [nuevoT]
-backP (Play songnum temas) = Play (songnum - 1) temas --tested!!
---Dada una Playlist crea una nueva con la lista de temas de la original.
+backP (Play songnum temas) = Play (songnum - 1) temas --tested!![
+--Dada una Playlist crea una nueva con la lisPlay 0 [Tem "Borderline" [] "Tame_Impala_Music", Tem "Despacito" [] "Des-pa-cito", Tem "Eternal Summer" [] "The_Strokes_Song"],ta de temas de la original.
 resetP :: Playlist -> Playlist
 resetP (Play songnum temas) = Play 0 temas --tested!!
+
+-- TEST:
+
+{-}
+test_tema :: [Bool]
+test_tema = [
+    nuevaP [(nuevoT "Borderline" "Tame_Impala_music"), (nuevoT "Despacito" "Des-pa-cito"), (nuevoT "Eternal Summer" "The_Strokes_Song")] == Play 0 [Tem "Borderline" [] "Tame_Impala_Music", Tem "Despacito" [] "Des-pa-cito", Tem "Eternal Summer" [] "The_Strokes_Song"],
+    actualP (Play 2 [(nuevoT "Borderline" "Tame_Impala_music"), (nuevoT "Despacito" "Des-pa-cito"), (nuevoT "Eternal Summer" "The_Strokes_Song")]) == Tem "Eternal Summer" [] "The_Strokes_Song",
+    skipP (Play 1 [(nuevoT "Borderline" "Tame_Impala_music"), (nuevoT "Despacito" "Des-pa-cito"), (nuevoT "Eternal Summer" "The_Strokes_Song")]) == Tem "Eternal Summer" [] "The_Strokes_Song",
+    backP (Play 1 [(nuevoT "Borderline" "Tame_Impala_music"), (nuevoT "Despacito" "Des-pa-cito"), (nuevoT "Eternal Summer" "The_Strokes_Song")]) == Tem "Borderline" [] "Tame_Impala_Song",
+    resetP (Play 1 [(nuevoT "Borderline" "Tame_Impala_music"), (nuevoT "Despacito" "Des-pa-cito"), (nuevoT "Eternal Summer" "The_Strokes_Song")]) == Play 0 [Tem "Borderline" [] "Tame_Impala_Music", Tem "Despacito" [] "Des-pa-cito", Tem "Eternal Summer" [] "The_Strokes_Song"]
+    ] 
+
+    
+--nuevaP [(nuevoT "Despacito" "des-pa-cito"), (nuevoT "Borderline" "Tame Impala"), (nuevoT "SOS" "SZA")]-}
