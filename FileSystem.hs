@@ -1,4 +1,4 @@
-module FileSystem (FileSystem, nuevoF, etiquetasF, temasF {-agregarF, filtrarF-})
+module FileSystem (FileSystem, nuevoF, etiquetasF, temasF, agregarF, filtrarF)
     where
 import Tipos
 import Tema
@@ -21,15 +21,20 @@ agregarF cancion (FS etiqueta tema) = FS etiqueta (cancion : tema)
 --                                           | otherwise = []
 
 filtrarF :: Etiqueta -> FileSystem -> [Tema]
---filtrarF etiqueta (FS etiquetas temas) = filter (\t -> etiqueta `elem` etiquetasTema t) temas
-  --where etiquetasTema t = foldr (\e acc -> if e `elem` etiquetasT t then e:acc else acc) [] etiquetas
+filtrarF etiqueta (FS etiquetas temas) = filter (\t -> etiqueta `elem` etiquetasTema t) temas
+  where etiquetasTema t = foldr (\e acc -> if e `elem` etiquetasT t then e:acc else acc) [] etiquetas
 -- filtrarF :: Etiqueta -> FileSystem -> [Tema]
 -- filtrarF etiqueta (FS etiquetas temas) = filter (tieneEtiqueta etiqueta) temas
 --   where
 --     tieneEtiqueta :: Etiqueta -> Tema -> Bool
 --     tieneEtiqueta etiqueta t = etiqueta `elem` t
 
-filtrarF etiqueta (FS etiquetas temas) = [x | x <- temas, aplicaT etiqueta x]
+--filtrarF etiqueta (FS etiquetas temas) = [x | x <- temas, aplicaT etiqueta x]
+
+--filtrarF etiqueta (FS etiquetas temas) = foldr (\each acc -> if aplicaT etiqueta etiquetas then each:acc else acc) [] etiquetas
+-- etiquetasT :: Tema -> [Etiqueta]
+-- etiquetasT (Tem _ etiqueta _) = etiqueta
+--foldr que compare si la etiqueta está en la lista de etiquetas, si está se une a la lista vacía, sino no. 
 {-
 
 FileSystem (lo del tema de que era privado)

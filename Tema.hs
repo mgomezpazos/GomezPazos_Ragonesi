@@ -14,7 +14,7 @@ tema_1 = Tem(Nombre [Etiqueta] Datos)
 -}
 --nuevoT2 = Tem 
 nuevoT :: Nombre -> Datos -> Tema 
-nuevoT nombre datos = Tem nombre [] datos
+nuevoT nombre = Tem nombre []
 
 nombreT :: Tema -> Nombre
 nombreT (Tem nombre _ _) = nombre
