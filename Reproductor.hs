@@ -40,6 +40,8 @@ reiniciaR (RP filesystem playlist) = RP filesystem (resetP playlist)
 --TEST:
 filesystem_test1 :: FileSystem
 filesystem_test1 = nuevoF
+playlist_test1 :: Playlist
+playlist_test1 = nuevaP []
 nuevoReproductor :: Reproductor
 nuevoReproductor = nuevoR filesystem_test1
 reproductor_Test1 :: Reproductor
@@ -61,7 +63,14 @@ temasTest = [cancionTest1, cancionTest2, cancionTest3]
 test_Reproductor :: [Bool]
 test_Reproductor = [
     nuevoReproductor == nuevoR filesystem_test1,
-    archivosR nuevoReproductor == filesystem_test1
+    archivosR nuevoReproductor == filesystem_test1,
+    --listaParaR
+    temasR nuevoReproductor == temasF filesystem_test1,
+    --playR
+    --actualR nuevoReproductor == actualP playlist_test1
+    avanzaR nuevoReproductor == RP filesystem_test1 (skipP playlist_test1),
+    retrocedeR nuevoReproductor == RP filesystem_test1 (backP playlist_test1),
+    reiniciaR nuevoReproductor == RP filesystem_test1 (resetP playlist_test1) 
     ]
     -- HASTA ACA ARRIBA DA TRUE, ARRANQUE A PENSAR LISTAPARAR PERO ME TIRA ERROR
     {-listaParaR "pop" reproductor_Test1 == nuevoT "Borderline" ["pop"] "Tame_Impala_music",
