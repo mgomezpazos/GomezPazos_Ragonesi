@@ -1,4 +1,5 @@
-module Reproductor ( Reproductor, nuevoR, temasR, archivosR, listaParaR {-playR-}, actualR, avanzaR, retrocedeR, reiniciaR)
+module Reproductor ( Reproductor, nuevoR, temasR, archivosR, listaParaR, playR, actualR, avanzarR, retrocederR,
+reiniciarR)
     where
 import Tipos
 import Tema
@@ -16,27 +17,12 @@ archivosR (RP filesystem playlist) = filesystem -- Funciona pero no sabemos si e
 listaParaR :: Etiqueta -> Reproductor -> [Tema]
 listaParaR etiqueta (RP fylesystem playlist) = filtrarF etiqueta fylesystem
 -- es igual que filtrarF
---Lctoe cargamos la lista de etiquetas y el nuevo reprodur y nos devuelve la lista con los temas con esa etiqueta
-
-
-{-filtrarF :: Etiqueta -> FileSystem -> [Tema]
-filtrarF etiqueta (FS etiquetas tema) = filter (\t -> etiqueta `elem` generosMusicales t) tema
-  where generosMusicales t = foldr (\each acc -> if each `elem` etiquetasT t then each:acc else acc) [] etiquetas
-  
-  
-  filtrarF "pop" (FS etiquetasTest [agregarT "pop" cancionTest2]) == [agregarT "pop" cancionTest2]
-  
-  
-  
-  
-  -}
-
-
 
 temasR :: Reproductor -> [Tema]
 temasR (RP filesystem _) = temasF filesystem
 --Nos devuelve los temas que tenga el reproductor
---playR :: Reproductor -> Etiqueta -> Reproductor
+playR :: Reproductor -> Etiqueta -> Reproductor
+playR (RP filesystem playlist) etiqueta = RP (filtrarF etiqueta filesystem) playlist
 --QUE?!?!?!
 -- le paso un reproductor con una etiqueta y me devuelve los temas de esa etiqueta
 
