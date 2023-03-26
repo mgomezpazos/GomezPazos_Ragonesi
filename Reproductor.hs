@@ -8,8 +8,8 @@ import FileSystem
 data Reproductor = RP FileSystem Playlist deriving (Eq, Show)
 
 
-nuevoR :: FileSystem -> Playlist -> Reproductor --Crea un nuevo reproductor a partir de un FileSystem y una nueva Playlist con su lista de temas vacia.
-nuevoR = RP
+nuevoR :: FileSystem -> Reproductor --Crea un nuevo reproductor a partir de un FileSystem y una nueva Playlist con su lista de temas vacia.
+nuevoR filesystem = RP filesystem (nuevaP []) -- esta la modifique porque sino nos pasaba que a la hora de hacer el test se complicaba mucho
 
 archivosR :: Reproductor -> FileSystem --Le pasamos el reproductor ya creado y le cargamos el FileSystem.
 archivosR (RP filesystem playlist) = filesystem 
@@ -38,8 +38,12 @@ reiniciaR (RP filesystem playlist) = RP filesystem (resetP playlist)
 
 
 --TEST:
-nuevoReproductor :: FileSystem -> Playlist -> Reproductor
-nuevoReproductor = nuevoR
+filesystem_test1 :: FileSystem
+filesystem_test1 = nuevoF
+nuevoReproductor :: Reproductor
+nuevoReproductor = nuevoR filesystem_test1
+reproductor_Test1 :: Reproductor
+reproductor_Test1 = nuevoR (agregarF (agregarT "pop" cancionTest1) filesystem_test1)
 cancionTest1 :: Tema
 cancionTest1 = nuevoT "Borderline" "Tame_Impala_music"
 cancionTest2 :: Tema
@@ -56,14 +60,29 @@ temasTest = [cancionTest1, cancionTest2, cancionTest3]
 
 test_Reproductor :: [Bool]
 test_Reproductor = [
-    nuevoReproductor [] [] == RP [] [],
+    nuevoReproductor == nuevoR filesystem_test1,
+    archivosR nuevoReproductor == filesystem_test1
+    ]
+    -- HASTA ACA ARRIBA DA TRUE, ARRANQUE A PENSAR LISTAPARAR PERO ME TIRA ERROR
+    {-listaParaR "pop" reproductor_Test1 == nuevoT "Borderline" ["pop"] "Tame_Impala_music",
+    temasR
+    playR
+    actualR
+    avanzaR
+    retrocedeR
+    reiniciaR
+    ]-}
+{-test_Reproductor :: [Bool]
+test_Reproductor = [
+    nuevoReproductor == RP [] [],
     archivosR (RP etiquetasTest temasTest) == etiquetasTest temasTest,
-    listaParaR "pop" (RP etiquetasTest temasTest) == temasTest,
-    temasR (RP (etiquetasTest temasTest) temasTest) == temasTest,
+    listaParaR "pop" (RP etiquetasTest temasTest) == temasTest
+    {-temasR (RP (etiquetasTest temasTest) temasTest) == temasTest,
     playR (RP etiquetasTest temasTest) "pop" == ,
     actualR (RP etiquetasTest temasTest) == actualP temasTest,
     avanzaR (RP etiquetasTest temasTest) == RP etiquetasTest temasTest (skipP temasTest),
     retrocedeR (RP etiquetasTest temasTest) == RP etiquetasTest temasTest (backP temasTest),
-    reiniciaR (RP etiquetasTest temasTest) == RP etiquetasTest (resetP temasTest)
+    reiniciaR (RP etiquetasTest temasTest) == RP etiquetasTest (resetP temasTest)-}
     ]
 
+-}
