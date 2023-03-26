@@ -31,18 +31,5 @@ test_tema = [
     datosT (Tem "Borderline" ["indie", "alternative", "Tame Impala"] "Tame_Impala_Song") == "Tame_Impala_Song",
     etiquetasT (Tem "Borderline" ["indie", "alternative", "Tame Impala"] "Tame_Impala_Song") == ["indie", "alternative", "Tame Impala"] ,
     agregarT "pop" (Tem "Borderline" ["indie", "alternative", "Tame Impala"] "Tame_Impala_Song") == Tem "Borderline" ["indie", "alternative", "Tame Impala", "pop"] "Tame_Impala_Song",
-    aplicaT "indie" (Tem "Borderline" ["indie", "alternative", "Tame Impala"] "Tame_Impala_Song") == True
+    aplicaT "indie" (Tem "Borderline" ["indie", "alternative", "Tame Impala"] "Tame_Impala_Song")
     ]
-
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
--- COMENTARIOS:
---El tipo Datos representa la secuencia de datos que conforma el archivo mp3
-{-
- 
-nombres, [etiqueta], datos son strings, hay que pensarlos como un ALIAS. No son mas que strings
-Tem es el constructor, me va a construir un tipo de dato Tema.
-Para construir un valor con Tem, tengo que pasarle 3 elementos. Nombre [Etiqueta] Datos
-Como la función no recibe Etiqueta, le puedo pasar listas con cero elementos
-tema_1 = Tem(Nombre [Etiqueta] Datos)
--}
---nuevoT2 = Tem 

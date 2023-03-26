@@ -1,1 +1,1 @@
-# GomezPazos_Ragonessi
+# GomezPazos_Ragonessi Trabajo Práctico N° 1: Paradigmas de la Programación
