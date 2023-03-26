@@ -1,5 +1,4 @@
-module Reproductor ( Reproductor, nuevoR, temasR, archivosR, listaParaR, playR, actualR, avanzarR, retrocederR,
-reiniciarR)
+module Reproductor ( Reproductor, nuevoR, temasR, archivosR, listaParaR {-playR-}, actualR, avanzaR, retrocedeR, reiniciaR)
     where
 import Tipos
 import Tema
@@ -15,18 +14,34 @@ archivosR :: Reproductor -> FileSystem
 archivosR (RP filesystem playlist) = filesystem -- Funciona pero no sabemos si esta bien
 --Le pasamos el reproductor ya creado y le cargamos el FileSystem.
 listaParaR :: Etiqueta -> Reproductor -> [Tema]
---listaParaR etiqueta (RP _ _) = 
+listaParaR etiqueta (RP fylesystem playlist) = filtrarF etiqueta fylesystem
 -- es igual que filtrarF
---Le cargamos la lista de etiquetas y el nuevo reproductor y nos devuelve la lista con los temas con esa etiqueta
+--Lctoe cargamos la lista de etiquetas y el nuevo reprodur y nos devuelve la lista con los temas con esa etiqueta
+
+
+{-filtrarF :: Etiqueta -> FileSystem -> [Tema]
+filtrarF etiqueta (FS etiquetas tema) = filter (\t -> etiqueta `elem` generosMusicales t) tema
+  where generosMusicales t = foldr (\each acc -> if each `elem` etiquetasT t then each:acc else acc) [] etiquetas
+  
+  
+  filtrarF "pop" (FS etiquetasTest [agregarT "pop" cancionTest2]) == [agregarT "pop" cancionTest2]
+  
+  
+  
+  
+  -}
+
+
+
 temasR :: Reproductor -> [Tema]
-temasR (RP temasF _) = temasF nuevoF
+temasR (RP filesystem _) = temasF filesystem
 --Nos devuelve los temas que tenga el reproductor
-playR :: Reproductor -> Etiqueta -> Reproductor
+--playR :: Reproductor -> Etiqueta -> Reproductor
 --QUE?!?!?!
 -- le paso un reproductor con una etiqueta y me devuelve los temas de esa etiqueta
 
 actualR :: Reproductor -> Tema -- Tema que se está reproduciendo
-actualR (RP filesystem playlist) = RP filesystem (actualP playlist)
+actualR (RP filesystem playlist) = actualP playlist
 
 avanzaR :: Reproductor -> Reproductor -- hay que entrar a file system en temas F y sumarle 1
 avanzaR (RP filesystem playlist) = RP filesystem (skipP playlist)

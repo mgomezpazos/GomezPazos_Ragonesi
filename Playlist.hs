@@ -41,16 +41,3 @@ test_tema = [
     backP (Play 1 [cancionTest1, cancionTest2, cancionTest3]) == Play 0 [cancionTest1, cancionTest2, cancionTest3],
     resetP (Play 1 [cancionTest1, cancionTest2, cancionTest3]) == Play 0 [cancionTest1, cancionTest2, cancionTest3]
     ] 
-
-{-}
-test_tema :: [Bool]
-test_tema = [
-    nuevaP [(nuevoT "Borderline" "Tame_Impala_music"), (nuevoT "Despacito" "Des-pa-cito"), (nuevoT "Eternal Summer" "The_Strokes_Song")] == Play 0 [Tem "Borderline" [] "Tame_Impala_Music", Tem "Despacito" [] "Des-pa-cito", Tem "Eternal Summer" [] "The_Strokes_Song"],
-    actualP (Play 2 [(nuevoT "Borderline" "Tame_Impala_music"), (nuevoT "Despacito" "Des-pa-cito"), (nuevoT "Eternal Summer" "The_Strokes_Song")]) == Tem "Eternal Summer" [] "The_Strokes_Song",
-    skipP (Play 1 [(nuevoT "Borderline" "Tame_Impala_music"), (nuevoT "Despacito" "Des-pa-cito"), (nuevoT "Eternal Summer" "The_Strokes_Song")]) == Tem "Eternal Summer" [] "The_Strokes_Song",
-    backP (Play 1 [(nuevoT "Borderline" "Tame_Impala_music"), (nuevoT "Despacito" "Des-pa-cito"), (nuevoT "Eternal Summer" "The_Strokes_Song")]) == Tem "Borderline" [] "Tame_Impala_Song",
-    resetP (Play 1 [(nuevoT "Borderline" "Tame_Impala_music"), (nuevoT "Despacito" "Des-pa-cito"), (nuevoT "Eternal Summer" "The_Strokes_Song")]) == Play 0 [Tem "Borderline" [] "Tame_Impala_Music", Tem "Despacito" [] "Des-pa-cito", Tem "Eternal Summer" [] "The_Strokes_Song"]
-    ] 
-
-    
---nuevaP [(nuevoT "Despacito" "des-pa-cito"), (nuevoT "Borderline" "Tame Impala"), (nuevoT "SOS" "SZA")]-}

@@ -16,33 +16,31 @@ temasF (FS _ tema) = tema
 agregarF :: Tema -> FileSystem -> FileSystem --Agrega el tema y sus etiquetas de ser necesario.
 agregarF cancion (FS etiqueta tema) = FS etiqueta (cancion : tema)
 
--- filtrarF :: Etiqueta -> FileSystem -> [ Tema ] --Le pasamos una etiqueta y nos dice la lista de temas con esa etiqueta. Usa las funciones del file Tema.
--- filtrarF etiqueta (FS etiquetas [nuevoT]) | [aplicaT etiqueta [nuevoT]] == True = [nuevoT] --deberíamos usar temasF? aplicamos listas por comprensión?
---                                           | otherwise = []
-
 filtrarF :: Etiqueta -> FileSystem -> [Tema]
-filtrarF etiqueta (FS etiquetas temas) = filter (\t -> etiqueta `elem` etiquetasTema t) temas
-  where etiquetasTema t = foldr (\e acc -> if e `elem` etiquetasT t then e:acc else acc) [] etiquetas
--- filtrarF :: Etiqueta -> FileSystem -> [Tema]
--- filtrarF etiqueta (FS etiquetas temas) = filter (tieneEtiqueta etiqueta) temas
---   where
---     tieneEtiqueta :: Etiqueta -> Tema -> Bool
---     tieneEtiqueta etiqueta t = etiqueta `elem` t
+filtrarF etiqueta (FS etiquetas tema) = filter (\t -> etiqueta `elem` generosMusicales t) tema
+  where generosMusicales t = foldr (\each acc -> if each `elem` etiquetasT t then each:acc else acc) [] etiquetas
 
---filtrarF etiqueta (FS etiquetas temas) = [x | x <- temas, aplicaT etiqueta x]
+-- TEST:
+nuevoFileSystem :: FileSystem
+nuevoFileSystem = nuevoF
+cancionTest1 :: Tema
+cancionTest1 = nuevoT "Borderline" "Tame_Impala_music"
+cancionTest2 :: Tema
+cancionTest2 = nuevoT "Despacito" "Des-pa-cito"
+cancionTest3 :: Tema
+cancionTest3 = nuevoT "Eternal Summer" "The_Strokes_Song"
+cancionTest4 :: Tema
+cancionTest4 = nuevoT "Lost Cause" "Billie_Eilish_Song"
+etiquetasTest :: [String]
+etiquetasTest = ["pop", "rock", "indie"]
+temasTest :: [Tema]
+temasTest = [cancionTest1, cancionTest2, cancionTest3]
 
---filtrarF etiqueta (FS etiquetas temas) = foldr (\each acc -> if aplicaT etiqueta etiquetas then each:acc else acc) [] etiquetas
--- etiquetasT :: Tema -> [Etiqueta]
--- etiquetasT (Tem _ etiqueta _) = etiqueta
---foldr que compare si la etiqueta está en la lista de etiquetas, si está se une a la lista vacía, sino no. 
-{-
-
-FileSystem (lo del tema de que era privado)
-
-A lo que se referia Emilio era, que podemos construir cosas sin el constructor.
-
-No Exportamos el CONSTRUCTOR, creando variables que pertenecen al mismo tipo.(*)
-
-Eso se hace con las funciones de FileSystem --> nuevoF
-
--}
+test_FileSystem :: [Bool]
+test_FileSystem = [
+    nuevoFileSystem == FS [] [],
+    etiquetasF (FS etiquetasTest temasTest ) == etiquetasTest,
+    temasF (FS etiquetasTest temasTest )== temasTest,
+    agregarF cancionTest4 (FS etiquetasTest temasTest) == FS etiquetasTest [cancionTest4, cancionTest1, cancionTest2, cancionTest3],
+    filtrarF "pop" (FS etiquetasTest [agregarT "pop" cancionTest2]) == [agregarT "pop" cancionTest2]
+    ]
