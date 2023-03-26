@@ -40,20 +40,36 @@ reiniciaR (RP filesystem playlist) = RP filesystem (resetP playlist)
 --TEST:
 filesystem_test1 :: FileSystem
 filesystem_test1 = nuevoF
+filesystem_test2 :: FileSystem
+filesystem_test2 = agregarF cancionTest1_etiqueta filesystem_test1
+filesystem_test3 :: FileSystem
+filesystem_test3 = agregarF cancionTest2_etiqueta filesystem_test2
 playlist_test1 :: Playlist
-playlist_test1 = nuevaP []
+playlist_test1 = nuevaP [cancionTest1_etiqueta, cancionTest2_etiqueta, cancionTest3_etiqueta]
 nuevoReproductor :: Reproductor
 nuevoReproductor = nuevoR filesystem_test1
+nuevoReproductor1 :: Reproductor
+nuevoReproductor1 = RP filesystem_test2 playlist_test1
 reproductor_Test1 :: Reproductor
 reproductor_Test1 = nuevoR (agregarF (agregarT "pop" cancionTest1) filesystem_test1)
+reproductor_Test2 :: Reproductor
+reproductor_Test2 = nuevoR filesystem_test3
 cancionTest1 :: Tema
 cancionTest1 = nuevoT "Borderline" "Tame_Impala_music"
+cancionTest1_etiqueta :: Tema
+cancionTest1_etiqueta = agregarT "pop" cancionTest1
 cancionTest2 :: Tema
 cancionTest2 = nuevoT "Despacito" "Des-pa-cito"
+cancionTest2_etiqueta :: Tema
+cancionTest2_etiqueta = agregarT "reggaeton" cancionTest2
 cancionTest3 :: Tema
 cancionTest3 = nuevoT "Eternal Summer" "The_Strokes_Song"
+cancionTest3_etiqueta :: Tema
+cancionTest3_etiqueta = agregarT "rock" cancionTest3
 cancionTest4 :: Tema
 cancionTest4 = nuevoT "Lost Cause" "Billie_Eilish_Song"
+cancionTest4_etiqueta :: Tema
+cancionTest4_etiqueta = agregarT "pop" cancionTest4
 
 etiquetasTest :: [String]
 etiquetasTest = ["pop", "rock", "indie"]
@@ -64,13 +80,13 @@ test_Reproductor :: [Bool]
 test_Reproductor = [
     nuevoReproductor == nuevoR filesystem_test1,
     archivosR nuevoReproductor == filesystem_test1,
-    --listaParaR
+    listaParaR "pop" reproductor_Test2 == [cancionTest1_etiqueta],
     temasR nuevoReproductor == temasF filesystem_test1,
-    --playR
+    playR nuevoReproductor1 "reggaeton" == RP filesystem_test2 playlist_test1,
     --actualR nuevoReproductor == actualP playlist_test1
-    avanzaR nuevoReproductor == RP filesystem_test1 (skipP playlist_test1),
-    retrocedeR nuevoReproductor == RP filesystem_test1 (backP playlist_test1),
-    reiniciaR nuevoReproductor == RP filesystem_test1 (resetP playlist_test1) 
+    avanzaR nuevoReproductor1 == RP filesystem_test2 (skipP playlist_test1),
+    retrocedeR nuevoReproductor1 == RP filesystem_test2 (backP playlist_test1),
+    reiniciaR nuevoReproductor1 == RP filesystem_test2 (resetP playlist_test1) 
     ]
     -- HASTA ACA ARRIBA DA TRUE, ARRANQUE A PENSAR LISTAPARAR PERO ME TIRA ERROR
     {-listaParaR "pop" reproductor_Test1 == nuevoT "Borderline" ["pop"] "Tame_Impala_music",
