@@ -1,5 +1,4 @@
-module Reproductor ( Reproductor, nuevoR, temasR, archivosR, listaParaR, playR, actualR, avanzarR, retrocederR,
-reiniciarR)
+module Reproductor ( Reproductor, nuevoR, temasR, archivosR, listaParaR, playR, actualR, avanzaR, retrocedeR, reiniciaR)
     where
 import Tipos
 import Tema
@@ -21,8 +20,10 @@ listaParaR etiqueta (RP fylesystem playlist) = filtrarF etiqueta fylesystem
 temasR :: Reproductor -> [Tema]
 temasR (RP filesystem _) = temasF filesystem
 --Nos devuelve los temas que tenga el reproductor
+--playR :: Reproductor -> Etiqueta -> Reproductor
+--playR (RP filesystem playlist) etiqueta = RP (filtrarF etiqueta filesystem) playlist
 playR :: Reproductor -> Etiqueta -> Reproductor
-playR (RP filesystem playlist) etiqueta = RP (filtrarF etiqueta filesystem) playlist
+playR (RP filesystem playlist) etiqueta = RP filesystem (nuevaP (listaParaR etiqueta (RP filesystem playlist)))
 --QUE?!?!?!
 -- le paso un reproductor con una etiqueta y me devuelve los temas de esa etiqueta
 
