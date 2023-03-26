@@ -1,8 +1,8 @@
 module Tema (Tema, nuevoT, nombreT, datosT, etiquetasT,agregarT, aplicaT)
     where
-
 import Tipos
 data Tema = Tem Nombre [Etiqueta] Datos deriving (Eq,Show, Ord)
+
 
 nuevoT :: Nombre -> Datos -> Tema 
 nuevoT nombre = Tem nombre []
@@ -22,8 +22,8 @@ agregarT etiqueta (Tem nombre etiquetas datos) = Tem nombre (etiquetas ++ [etiqu
 aplicaT :: Etiqueta -> Tema -> Bool --nos dice si esa etiqueta ya pertenece al tema
 aplicaT etiqueta (Tem _ etiquetas _) = etiqueta `elem` etiquetas
 
--- TEST:
 
+-- TEST:
 test_tema :: [Bool]
 test_tema = [
     nuevoT "a" "b" == Tem "a" [] "b",

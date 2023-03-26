@@ -4,21 +4,23 @@ import Tipos
 import Tema
 data FileSystem = FS [Etiqueta] [Tema] deriving (Eq, Show)
 
-nuevoF :: FileSystem --Crea un nuevo FileSystem con sus listas vacias. (Crea una lista de listas vacías)
+
+nuevoF :: FileSystem --Crea un nuevo FileSystem con sus listas vacias.
 nuevoF = FS [] [] 
 
 etiquetasF :: FileSystem -> [ Etiqueta ] --Crea la lista de etiquetas
-etiquetasF (FS etiqueta tema) = etiqueta -- CHECKED!!!
+etiquetasF (FS etiqueta _) = etiqueta
 
-temasF :: FileSystem -> [ Tema ] --Crea la listas de temas
+temasF :: FileSystem -> [ Tema ] --Crea la lista de temas
 temasF (FS _ tema) = tema
 
 agregarF :: Tema -> FileSystem -> FileSystem --Agrega el tema y sus etiquetas de ser necesario.
 agregarF cancion (FS etiqueta tema) = FS etiqueta (cancion : tema)
 
-filtrarF :: Etiqueta -> FileSystem -> [Tema]
+filtrarF :: Etiqueta -> FileSystem -> [Tema] --Devuelve una lista con los temas que tengan la etiqueta que recibe la función.
 filtrarF etiqueta (FS etiquetas tema) = filter (\t -> etiqueta `elem` generosMusicales t) tema
   where generosMusicales t = foldr (\each acc -> if each `elem` etiquetasT t then each:acc else acc) [] etiquetas
+
 
 -- TEST:
 nuevoFileSystem :: FileSystem
