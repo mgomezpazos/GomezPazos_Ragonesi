@@ -50,5 +50,24 @@ public class OOStack {
 			return palabras.size();
 		}
 	}
+	
 
+	static abstract class SuperClass {
+		public abstract OOStack isEmpty();
+		public abstract OOStack push(String v );
+		public abstract OOStack pop();
+		public abstract OOStack top();
+		public abstract OOStack size();
+	}
+	
+	static class Empty extends SuperClass {
+		public OOStack isEmpty() { return True() }
+
+		
+		static OOStack True() {
+			 OOStack t = new OOStack();
+			 t.palabras = new Empty();
+			 return t;
+		};
+	}
 }
