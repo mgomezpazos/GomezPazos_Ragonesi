@@ -30,7 +30,6 @@ filtrarF :: Etiqueta -> FileSystem -> [Tema] --Devuelve una lista con los temas 
 -- Función Actualizada luego de testear:
 filtrarF etiquetaAcomparar (FS etiqueta tema) = [lista | lista <- tema, aplicaT etiquetaAcomparar lista]
 
-
 -- TEST:
 
 -- variables de FileSystem:
