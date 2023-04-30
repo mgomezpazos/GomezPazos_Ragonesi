@@ -7,17 +7,24 @@ import java.util.List;
 public class OOStack {
 	static public String stackEmptyErrorDescription = "Stack is empty";
 	public List stack = new ArrayList();
+	public List estadoStack = new ArrayList();
 	
-	SuperCosa cosa;
 	
+	SuperNodo cosa;
+	
+	public OOStack push(String string) {
+	  stack.add(string);
+	  return this;
+	}
+
 	public boolean isEmpty() {
 		return stack.isEmpty();
 	}
 
-	public OOStack push(String string) {
-		 stack.add(string);
-			return this;
-		}
+	//public OOStack push(String string) {
+	//	 stack.add(string);
+	//		return this;
+	//	}
 
 	public Object pop() {
 		return cosa.pop(this);
