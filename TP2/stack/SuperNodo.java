@@ -6,9 +6,9 @@ public abstract class SuperNodo {
 	
 	public abstract boolean isEmpty();
 	
-	public abstract Object pop();
+	public abstract void pop();
 	
-	public abstract Object top();
+	public abstract void top();
 
 	public abstract int size();
 }
