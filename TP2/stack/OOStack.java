@@ -2,72 +2,41 @@ package stack;  // TEST
 
 
 import java.util.ArrayList;
-
-import org.junit.jupiter.api.Test;
+import java.util.List;
 
 public class OOStack {
 	static public String stackEmptyErrorDescription = "Stack is empty";
-	private ArrayList palabras = new ArrayList();
+	public List stack = new ArrayList();
 	
+	SuperCosa cosa;
 	
 	public boolean isEmpty() {
-		return palabras.isEmpty();
-		// TODO Auto-generated method stub
+		return stack.isEmpty();
 	}
 
 	public OOStack push(String string) {
-		 palabras.add(string);
+		 stack.add(string);
 			return this;
 		}
-		// TODO Auto-generated method stub
 
 	public Object pop() {
-		// TODO Auto-generated method stub
-		if (isEmpty()) {
-			return null;
-		}
-		else {
-			return palabras.remove(palabras.size()-1);
-		}
+		return cosa.pop(this);
 	}
 
 	public Object top() {
-		// TODO Auto-generated method stub
-		if (isEmpty()) {
-			return null;
-		}
-		else {
-			return palabras.get(palabras.size()-1);
-		}
+		return cosa.top(this);
 	}
 
+	public Object topBasico() {
+		return stack.get(stack.size()- 1);		
+	}
+	
+	public Object topExplosivo() throws Error{
+		throw new Error (OOStack.stackEmptyErrorDescription);
+	}
+	
 	public int size() {
-		// TODO Auto-generated method stub
-		if (isEmpty()) {
-			return 0;
-		}
-		else {
-			return palabras.size();
-		}
+			return stack.size();
 	}
 	
-
-	static abstract class SuperClass {
-		public abstract OOStack isEmpty();
-		public abstract OOStack push(String v );
-		public abstract OOStack pop();
-		public abstract OOStack top();
-		public abstract OOStack size();
-	}
-	
-	static class Empty extends SuperClass {
-		public OOStack isEmpty() { return True() }
-
-		
-		static OOStack True() {
-			 OOStack t = new OOStack();
-			 t.palabras = new Empty();
-			 return t;
-		};
-	}
 }
