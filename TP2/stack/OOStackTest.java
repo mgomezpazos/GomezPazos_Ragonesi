@@ -8,17 +8,14 @@ import org.junit.jupiter.api.Test;
 
 public class OOStackTest {
 
-//FUNCIONA
   @Test public void test01StackShouldBeEmptyWhenCreated() {
     assertTrue( new OOStack().isEmpty() );
   }
   
-//FUNCIONA
   @Test public void test02PushAddElementsToTheStack() {
     assertFalse( new OOStack().push( "Something" ).isEmpty() );
   }
   
-//FUNCIONA
   @Test public void test03PopRemovesElementsFromTheStack() {
     OOStack stack = new OOStack();
     stack.push( "Something" );
@@ -26,7 +23,6 @@ public class OOStackTest {
     assertTrue( stack.isEmpty() );
   }
  
-//FUNCIONA
   @Test public void test04PopReturnsLastPushedObject() {
     OOStack stack = new OOStack();
     String pushedObject = "Something";
@@ -34,7 +30,6 @@ public class OOStackTest {
     assertEquals( stack.pop(), pushedObject );
   }
   
-//FUNCIONA
   @Test public void test05StackBehavesLIFO() {
     OOStack stack = new OOStack();
     String firstPushedObject = "First";
@@ -48,14 +43,12 @@ public class OOStackTest {
     assertTrue( stack.isEmpty() );
   }
   
-//FUNCIONA
   @Test public void test06TopReturnsLastPushedObject() {
     String pushedObject = "Something";
     assertEquals( new OOStack().push( pushedObject ).top(), 
                   pushedObject );
   }
 
-//FUNCIONA
   @Test public void test07TopDoesNotRemoveObjectFromStack() {
     OOStack stack = new OOStack();
     stack.push( "Something" );

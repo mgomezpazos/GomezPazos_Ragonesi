@@ -7,16 +7,15 @@ public class NodoNoVacio extends SuperNodo {
 	}
 	
 	public void pop() {
-		//OOStack.primerElemento = OOStack.primerElemento.anterior;
-		//check
 	}
 	
 	public void top() {
-		//return OOStack.primerElemento = new NodoNoVacio();
 	}
 
-	public int size() { // review!!
-		return 0;
+	public int size() {
+		OOStack variable = new OOStack();
+		return variable.contar();
+
 	}
 }
 
