@@ -13,7 +13,6 @@ public class NodoNoVacio extends SuperNodo {
 	}
 
 	public void size() {
-		//OOStack variable = new OOStack();
 	}
 }
 

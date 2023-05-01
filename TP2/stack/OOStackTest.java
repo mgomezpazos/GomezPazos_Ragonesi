@@ -1,11 +1,12 @@
 package stack;
 
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 
 public class OOStackTest {
@@ -57,48 +58,35 @@ public class OOStackTest {
   @Test public void test07TopDoesNotRemoveObjectFromStack() {
     OOStack stack = newStack();
     stack.push( something );
-    System.out.print(stack.size());
     assertEquals( stack.size(), 1 );
     stack.top();
-    System.out.print(stack.size());
     assertEquals( stack.size(), 1 );
   }
   
 
   @Test public void test08CanNotPopWhenThereAreNoObjectsInTheStack() {
     OOStack stack = newStack();
-    try {
-      stack.pop();
-      fail( expectedMessageNotUnderstood );
-    } catch (Error e) {
-      assertTrue( e.getMessage().equals( OOStack.stackEmptyErrorDescription ) );
-    }
+    assertThrowsLike(OOStack.stackEmptyErrorDescription,()-> stack.pop());
   }
 
   @Test public void test09CanNotPopWhenThereAreNoObjectsInTheStackAndTheStackHadObjects() {
     OOStack stack = newStack();
     stack.push( something );
     stack.pop();
-    try {
-      stack.pop();
-      fail( expectedMessageNotUnderstood );
-    } catch (Error e) {
-      assertTrue( e.getMessage().equals( OOStack.stackEmptyErrorDescription ) );
-    }
+    assertThrowsLike(OOStack.stackEmptyErrorDescription,()-> stack.pop());
   }
 
   @Test public void test10CanNotTopWhenThereAreNoObjectsInTheStack() {
     OOStack stack = newStack();
-    try {
-      stack.top();
-      fail( expectedMessageNotUnderstood );
-    } catch (Error e) {
-      assertTrue( e.getMessage().equals( OOStack.stackEmptyErrorDescription ) );
-    }
+    assertThrowsLike(OOStack.stackEmptyErrorDescription,()-> stack.top());
   }
 
   private OOStack newStack() {
 	  OOStack stack = new OOStack();
 	  return stack;
 }
+  
+  private void assertThrowsLike(String msg, Executable codeToRun) {
+		assertEquals(msg, assertThrows(Error.class, codeToRun).getMessage());
+	}
 }
