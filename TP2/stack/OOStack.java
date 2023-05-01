@@ -4,11 +4,16 @@ public class OOStack {
 	static public String stackEmptyErrorDescription = "Stack is empty";
 	public static SuperNodo primerElemento;
 	
+	public int contador = 0;
 	
-	public int contar() {
-		int contador = 0;
+	public int contarpush() {
 		return contador++;
 	}
+	
+	public int contarpop() {
+		return contador++;
+	}
+	
 	public OOStack() {
 		primerElemento = new NodoVacio();
 	}
@@ -18,7 +23,7 @@ public class OOStack {
 	  nuevoEstado.informacion = string;
 	  nuevoEstado.anterior = primerElemento;
 	  primerElemento = nuevoEstado;
-	  contar();
+	  contarpush();
 	  return this;
 	  
 	}
@@ -29,6 +34,7 @@ public class OOStack {
 
 	public Object pop() {
 		primerElemento.pop();
+		contarpop();
 		Object infoDelReturn = primerElemento.informacion;
 		primerElemento = primerElemento.anterior;
 		return infoDelReturn;
@@ -40,7 +46,8 @@ public class OOStack {
 	}
 
 	public int size() {
-		return primerElemento.size();
+		return (Math.abs(contarpush()- contarpop())) ;
 	}
+	
 	
 }

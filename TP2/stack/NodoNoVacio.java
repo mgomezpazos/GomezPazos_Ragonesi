@@ -12,10 +12,8 @@ public class NodoNoVacio extends SuperNodo {
 	public void top() {
 	}
 
-	public int size() {
-		OOStack variable = new OOStack();
-		return variable.contar();
-
+	public void size() {
+		//OOStack variable = new OOStack();
 	}
 }
 

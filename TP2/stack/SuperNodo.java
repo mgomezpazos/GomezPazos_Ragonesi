@@ -10,5 +10,5 @@ public abstract class SuperNodo {
 	
 	public abstract void top();
 
-	public abstract int size();
+	public abstract void size();
 }

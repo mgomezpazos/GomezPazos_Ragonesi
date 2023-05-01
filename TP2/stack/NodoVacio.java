@@ -14,8 +14,7 @@ public class NodoVacio extends SuperNodo{
 		throw new Error (OOStack.stackEmptyErrorDescription);
 	}
 
-	public int size() {
-		return 0;
+	public void size() {
 	}
 }
 	
