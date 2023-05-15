@@ -11,7 +11,7 @@ public class MarsRover{
    // List <Integer> coordenadasRover = new ArrayList();
 
     public MarsRover (int x, int y, char puntoCardinal) {
-    	//FALTA EXCEPTION DE ALFO NADA QUE VER
+    	//FALTA EXCEPTION DE ALGO NADA QUE VER
    // public MarsRover(int x, int y, char puntoCardinal) {
     	this.puntoCardinal = puntoCardinal;
         position = new Location(x, y);
@@ -34,9 +34,9 @@ public class MarsRover{
     	return position.y;
     }
 
-    public boolean isHeadingNorth() {
-        return true;
-    }
+//    public boolean isHeadingNorth() {
+//        return true;
+//    }
 
     public void comandos(String movimientos) {
     	// FALTA EXCEPTION DE UN COMANDO NADA QUE VER
