@@ -3,25 +3,21 @@ package marsrover;
 public abstract class Command {
 
 	public char comando;
-	public MarsRover rover;
 
 	public Command(char comando) {
 		this.comando = comando; // BUSCAR UN MEJOR NOMBRE
 	}
 
-	public void moverse(String comandos) {
-		for (int comando = 0; comando < comandos.length(); comando++) {
+	public static void moverse(char comando, MarsRover rover ) {
 			if (comando != 'f' && comando != 'b' && comando != 'r' && comando != 'l') {
 				throw new RuntimeException("Comando Inválido!");
 			} else
-				applyComandos(comandos, rover);
-		}
+				applyComandos(comando, rover);
+		
 
 	}
 
-	private void applyComandos(String comandos, MarsRover rover) {
-		for (int comando = 0; comando < comandos.length(); comando++) {
-
+	private static void applyComandos(char comando, MarsRover rover) {
 			if (comando == 'f') {
 				rover.position.modifyCoordinates(new Forward().mover(rover.puntoCardinal));
 			} else if (comando == 'b') {
@@ -33,5 +29,4 @@ public abstract class Command {
 			}
 
 		}
-	}
 }

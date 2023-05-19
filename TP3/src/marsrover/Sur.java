@@ -2,10 +2,10 @@ package marsrover;
 
 public class Sur extends Heading {
 
-	public char orientacion;
+	public char orientation;
 
 	public Sur() {
-		orientacion = 'S';
+		orientation = 'S';
 	}
 
 	public Location foward() {

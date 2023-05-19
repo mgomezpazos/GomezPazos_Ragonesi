@@ -2,10 +2,10 @@ package marsrover;
 
 public class Oeste extends Heading {
 
-	public char orientacion;
+	public char orientation;
 
 	public Oeste() {
-		orientacion = 'O';
+		orientation = 'O';
 	}
 
 	public Location foward() {
