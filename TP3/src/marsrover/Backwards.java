@@ -1,13 +1,12 @@
 package marsrover;
 
-public abstract class Backwards extends Command{
+public class Backwards extends Command{
 
-	public Backwards(char comando) {
+	public Backwards() {
 		super('b');
 	}
 
-	@Override
-	public void moveBackwards() {		
-	}
-
+	public Location mover(Heading direccion) {
+		return direccion.backwards();
+		}
 }

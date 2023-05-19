@@ -1,28 +1,28 @@
 package marsrover;
 
-public class Norte extends Heading {
+public class Este extends Heading {
 
 	public char orientacion;
 
-	public Norte() {
-		orientacion = 'N';
+	public Este() {
+		orientacion = 'E';
 	}
 
 	public Location foward() {
-		return new Location(0, 1);
+		return new Location(1, 0);
 	}
 
 	public Location backwards() {
-		return new Location(0, -1);
+		return new Location(-1, 0);
 
 	}
 
 	public Heading rotateRight() {
-		return new Este();
+		return new Sur();
 	}
 
 	public Heading rotateLeft() {
-		return new Oeste();
+		return new Norte();
 	}
 
 }

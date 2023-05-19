@@ -1,22 +1,27 @@
 package marsrover;
 
-public abstract class Sur extends Heading {
+public class Sur extends Heading {
 
-	public Sur(char direction) {
-		super('S');
+	public char orientacion;
+
+	public Sur() {
+		orientacion = 'S';
 	}
 
-	public void isHeadingSouth() {
-
-		if (move == 'f') {
-			y -= 1;
-		} else if (move == 'b') {
-			y += 1;
-		} else if (move == 'l') {
-			puntoCardinal = 'E';
-		} else if (move == 'r') {
-			puntoCardinal = 'O';
-		}
-
+	public Location foward() {
+		return new Location(0, -1);
 	}
+
+	public Location backwards() {
+		return new Location(0, 1);
+	}
+
+	public Heading rotateRight() {
+		return new Oeste();
+	}
+
+	public Heading rotateLeft() {
+		return new Este();
+	}
+
 }

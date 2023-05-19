@@ -1,21 +1,13 @@
 package marsrover;
 
 public abstract class Heading {
-	
-	public char direction;
 
-	public Heading(char direction) {
-		this.direction = direction;
-	}
-	
-	public abstract void isHeadingNorth();
-	
-	public abstract void isHeadingSouth();
-	
-	public abstract void isHeadingEast();
-	
-	public abstract void isHeadingWest();
-//	public abstract void direcciones();
+	public abstract Location foward();
 
+	public abstract Location backwards();
+
+	public abstract Heading rotateRight();
+
+	public abstract Heading rotateLeft();
 
 }

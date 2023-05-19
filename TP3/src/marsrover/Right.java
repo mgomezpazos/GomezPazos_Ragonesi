@@ -1,13 +1,13 @@
 package marsrover;
 
-public abstract class Right extends Command {
+public class Right extends Command {
 
-	public Right(char comando) {
+	public Right() {
 		super('r');
 	}
 
-	@Override
-	public void rotateRight() {		
-	}
+	public Heading move(Heading direccion) {
+		return direccion.rotateRight();
 
+	}
 }

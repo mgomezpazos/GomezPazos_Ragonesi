@@ -1,13 +1,12 @@
 package marsrover;
 
-public abstract class Forward extends Command{
+public class Forward extends Command {
 
-	public Forward(char comando) {
+	public Forward() {
 		super('f');
 	}
 
-	@Override
-	public void moveForward() {		
+	public Location mover(Heading direccion) {
+		return direccion.foward();
 	}
-
 }

@@ -1,25 +1,28 @@
 package marsrover;
 
-public abstract class Oeste extends Heading{
+public class Oeste extends Heading {
 
-	public Oeste(char direction) {
-		super('O');
+	public char orientacion;
+
+	public Oeste() {
+		orientacion = 'O';
 	}
-	
-	public void isHeadingWest() {
-		if (move == 'f') {
-			
-			x -= 1;
-		}
-		else if (move == 'b') {
-			x += 1;
-		}
-		else if (move == 'l') {
-			puntoCardinal = 'S';
-		}
-		else if (move == 'r') {
-			puntoCardinal = 'N';
-		}
+
+	public Location foward() {
+		return new Location(-1, 0);
+	}
+
+	public Location backwards() {
+		return new Location(1, 0);
+
+	}
+
+	public Heading rotateRight() {
+		return new Norte();
+	}
+
+	public Heading rotateLeft() {
+		return new Sur();
 	}
 
 }

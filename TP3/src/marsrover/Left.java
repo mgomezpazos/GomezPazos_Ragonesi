@@ -1,15 +1,13 @@
 package marsrover;
 
-public abstract class Left extends Command {
+public class Left extends Command {
 
-	public Left(char comando) {
+	public Left() {
 		super('l');
-		}
+	}
 
-	@Override
-	public void rotateLeft() {
-		// TODO Auto-generated method stub
-		
+	public Heading move(Heading direccion) {
+		return direccion.rotateLeft();
 	}
 
 }
