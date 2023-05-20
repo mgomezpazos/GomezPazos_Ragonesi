@@ -5,8 +5,16 @@ public class Backwards extends Command{
 	public Backwards() {
 		super('b');
 	}
-
-	public Location mover(Heading direccion) {
-		return direccion.backwards();
-		}
+	
+	public boolean canHandle(char command) {
+		return value == command;
+	}
+	
+	public void mover(MarsRover rover) {
+		rover.position.modifyCoordinates(rover.puntoCardinal.backwards());
+	}
+	
+//	public Location mover(Heading direccion) {
+//		return direccion.backwards();
+//		}
 }

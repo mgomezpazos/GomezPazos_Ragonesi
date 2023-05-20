@@ -5,8 +5,18 @@ public class Forward extends Command {
 	public Forward() {
 		super('f');
 	}
-
-	public Location mover(Heading direccion) {
-		return direccion.foward();
+	
+	public boolean canHandle(char command) {
+		return value ==command;
 	}
+	
+	public void mover(MarsRover rover) {
+		rover.position.modifyCoordinates(rover.puntoCardinal.foward());
+	}
+
+//	public Location mover(Heading direccion) {
+//		return direccion.foward();
+//	}
+//	
+	
 }

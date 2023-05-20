@@ -5,9 +5,17 @@ public class Left extends Command {
 	public Left() {
 		super('l');
 	}
-
-	public Heading move(Heading direccion) {
-		return direccion.rotateLeft();
+	
+	public boolean canHandle(char command) {
+		return value == command;
 	}
+	
+	public void mover(MarsRover rover) {
+		rover.modifyOrientation(rover.puntoCardinal.rotateLeft());
+	}
+
+//	public Heading move(Heading direccion) {
+//		return direccion.rotateLeft();
+//	}
 
 }
