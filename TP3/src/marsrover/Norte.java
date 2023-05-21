@@ -2,7 +2,6 @@ package marsrover;
 
 public class Norte extends Heading {
 
-
 	public char orientation;
 
 	public Norte() {

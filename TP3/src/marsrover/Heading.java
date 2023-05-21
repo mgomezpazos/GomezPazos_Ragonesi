@@ -1,8 +1,9 @@
 package marsrover;
 
 public abstract class Heading {
-	
-	public Heading() {}
+
+	public Heading() {
+	}
 
 	public abstract Location foward();
 
