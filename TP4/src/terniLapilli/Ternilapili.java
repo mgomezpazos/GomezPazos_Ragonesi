@@ -3,9 +3,13 @@ import java.util.Set;
 import java.util.HashSet;
 
 public class Ternilapili {
-	public char currentPlayer;
+	public static final String NoPiecesLeft = "You have no pieces left";
+	public static final String PleaseCheckTheLimits = "Please check the limits";
+	public static final String ThatCellIsTaken = "That cell is taken";
+	public static final String NotYourTurn = "Not your turn";
 
-	public String turn = "X";
+	public GameStatus gameStatus;
+	public Player turno = new PlayerX();
 
 	public Set<Position> Xs;
 	public Set<Position> Os;
@@ -24,55 +28,48 @@ public class Ternilapili {
 	}
 
 	public void putXat(Position position) {
-		if (turn.equals("O")) {
-			throw new RuntimeException("Not your turn");
+		if (turno.isPlayingO()) {
+			throw new RuntimeException(NotYourTurn);
 		}
 		if (Xs.contains(position)) {
-			throw new RuntimeException("That cell is taken");
+			throw new RuntimeException(ThatCellIsTaken);
 		}
 		if (Os.contains(position)) {
-			throw new RuntimeException("That cell is taken");
+			throw new RuntimeException(ThatCellIsTaken);
 		}
-		if ((position.row) > 3 || (position.column) > 3 && (position.row) < 0 || (position.column) < 0) {
-			throw new RuntimeException("Please check the limits");
+		if ((position.row) >= 3 || (position.column) >= 3 && (position.row) < 0 || (position.column) < 0) {
+			throw new RuntimeException(PleaseCheckTheLimits);
 		}
 		if (Xs.size() >= 3) {
-			throw new RuntimeException("You have no pieces left");
+			throw new RuntimeException(NoPiecesLeft);
 		}
 
 		Xs.add(position);
-
-		System.out.println("X: " + Xs);
-		System.out.println("X size: " + Xs.size());
-		turn = "O";
+//		turn = "O";
+		turno = turno.playsO();
 
 	}
 
 	public void putOat(Position position) {
-		if (turn.equals("X")) {
-			throw new RuntimeException("Not your turn");
+		if (turno.isPlayingX()) {
+			throw new RuntimeException(NotYourTurn);
 		}
 		if (Xs.contains(position)) {
-			throw new RuntimeException("That cell is taken");
+			throw new RuntimeException(ThatCellIsTaken);
 		}
 		if (Os.contains(position)) {
-			throw new RuntimeException("That cell is taken");
+			throw new RuntimeException(ThatCellIsTaken);
 		}
-		if ((position.row) > 3 || (position.column) > 3 && (position.row) < 0 || (position.column) < 0) {
-			throw new RuntimeException("Please check the limits");
+		if ((position.row) >= 3 || (position.column) >= 3 && (position.row) < 0 || (position.column) < 0) {
+			throw new RuntimeException(PleaseCheckTheLimits);
 		}
 //		if (Os.size() >= 3) {
 //			throw new RuntimeException("You cunt, you already have 3 pieces!");
 //		}
 
 		Os.add(position);
-		System.out.println("O: " + Os);
-		System.out.println("O size: " + Os.size());
-		turn = "X";
-	}
-
-	public boolean isEmpty() {
-		return (Xs.size() == 0) && (Os.size() == 0);
+//		turn = "X";
+		turno = turno.playsX();
 	}
 
 	public boolean isWinnerX() {
@@ -84,7 +81,7 @@ public class Ternilapili {
 	}
 
 	public boolean XhasCompletedRow() {
-		for (int iteradorFilas = 1; iteradorFilas <= 3; iteradorFilas++) {
+		for (int iteradorFilas = 0; iteradorFilas < 3; iteradorFilas++) {
 			int filaObservable = iteradorFilas;
 			int count = (int) Xs.stream().filter(p -> p.row == filaObservable).count();
 			if (count == 3) {
@@ -95,7 +92,7 @@ public class Ternilapili {
 	}
 
 	public boolean OhasCompletedRow() {
-		for (int iteradorFilas = 1; iteradorFilas <= 3; iteradorFilas++) {
+		for (int iteradorFilas = 0; iteradorFilas < 3; iteradorFilas++) {
 			int filaObservable = iteradorFilas;
 			int count = (int) Os.stream().filter(p -> p.row == filaObservable).count();
 			if (count == 3) {
@@ -106,7 +103,7 @@ public class Ternilapili {
 	}
 
 	public boolean XhasCompletedColumn() {
-		for (int iteradorColumnas = 1; iteradorColumnas <= 3; iteradorColumnas++) {
+		for (int iteradorColumnas = 0; iteradorColumnas < 3; iteradorColumnas++) {
 			int columnaObservable = iteradorColumnas;
 			int count = (int) Xs.stream().filter(p -> p.column == columnaObservable).count();
 			if (count == 3) {
@@ -117,7 +114,7 @@ public class Ternilapili {
 	}
 
 	public boolean OhasCompletedColumn() {
-		for (int iteradorColumnas = 1; iteradorColumnas <= 3; iteradorColumnas++) {
+		for (int iteradorColumnas = 0; iteradorColumnas < 3; iteradorColumnas++) {
 			int columnaObservable = iteradorColumnas;
 			int count = (int) Os.stream().filter(p -> p.column == columnaObservable).count();
 			if (count == 3) {
@@ -128,25 +125,26 @@ public class Ternilapili {
 	}
 
 	public boolean XhasCompletedDiagonal() {
-		boolean diagonal1 = Xs.contains(new Position(1, 1)) && Xs.contains(new Position(2, 2))
-				&& Xs.contains(new Position(3, 3));
+		boolean diagonal1 = Xs.contains(new Position(0, 0)) && Xs.contains(new Position(1, 1))
+				&& Xs.contains(new Position(2, 2));
 
-		boolean diagonal2 = Xs.contains(new Position(1, 3)) && Xs.contains(new Position(2, 2))
-				&& Xs.contains(new Position(3, 1));
+		boolean diagonal2 = Xs.contains(new Position(0, 2)) && Xs.contains(new Position(1, 1))
+				&& Xs.contains(new Position(2, 0));
 
 		return diagonal1 || diagonal2;
 	}
 
 	public boolean OhasCompletedDiagonal() {
-		boolean diagonal1 = Os.contains(new Position(1, 1)) && Os.contains(new Position(2, 2))
-				&& Os.contains(new Position(3, 3));
+		boolean diagonal1 = Os.contains(new Position(0, 0)) && Os.contains(new Position(1, 1))
+				&& Os.contains(new Position(2, 2));
 
-		boolean diagonal2 = Os.contains(new Position(1, 3)) && Os.contains(new Position(2, 2))
-				&& Os.contains(new Position(3, 1));
+		boolean diagonal2 = Os.contains(new Position(0, 2)) && Os.contains(new Position(1, 1))
+				&& Os.contains(new Position(2, 0));
 
 		return diagonal1 || diagonal2;
 	}
-//	public boolean isPiecePlacedCorrectly(Coordinate coordinate, char piece) {
-//        return board[row][col] == piece;
-//    }
+	
+	public boolean isEmpty() {
+		return (Xs.size() == 0) && (Os.size() == 0);
+	}
 }

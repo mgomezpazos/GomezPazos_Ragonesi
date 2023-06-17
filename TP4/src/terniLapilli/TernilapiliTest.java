@@ -19,7 +19,7 @@ public class TernilapiliTest {
 
 	public void testPutsPieceOutOfTheBoard() {
 		Ternilapili juego = new Ternilapili();
-		Position position = new Position(4, 1); 
+		Position position = new Position(3, 1); 
 
 		try {
 			juego.putXat(position);
@@ -142,4 +142,72 @@ public class TernilapiliTest {
 			assertEquals("You have no pieces left", e.getMessage());
 		}
 	}
+	
+	@Test public void testNobodyWonYet() {
+		   Ternilapili game = new Ternilapili();
+
+		   game.putXat( new Position( 1, 1 ));
+		   game.putOat( new Position( 2, 2 ));
+		   game.putXat( new Position( 0, 0 ));
+		   game.putOat( new Position( 1, 2 ));
+		   
+		   assertFalse(game.isWinnerX());
+		   assertFalse(game.isWinnerO());
+
+	   }
+	   
+	   @Test
+	   public void testXWinsTheGameInStraightLine() {
+	       Ternilapili game = new Ternilapili();
+	       game.putXat(new Position(0, 0));
+	       game.putOat(new Position(2, 1));
+	       game.putXat(new Position(1, 0));
+	       game.putOat(new Position(1, 1));
+	       game.putXat(new Position(2, 0));
+
+	       assertTrue(game.isWinnerX());
+	       assertFalse(game.isWinnerO());
+	   }
+	   
+	   @Test
+	   public void test0WinsTheGameInStraightLine() {
+	       Ternilapili game = new Ternilapili();
+	       game.putXat(new Position(2, 1));
+	       game.putOat(new Position(0, 0));
+	       game.putXat(new Position(1, 1));
+	       game.putOat(new Position(1, 0));
+	       game.putXat(new Position(1, 2));
+	       game.putOat(new Position(2, 0));
+
+	       assertFalse(game.isWinnerX());
+	       assertTrue(game.isWinnerO());
+	   }
+	
+	   @Test
+	   public void testXWinsTheGameInDiagonal() {
+	       Ternilapili game = new Ternilapili();
+	       game.putXat(new Position(0, 0));
+	       game.putOat(new Position(0, 1));
+	       game.putXat(new Position(1, 1));
+	       game.putOat(new Position(1, 0));
+	       game.putXat(new Position(2, 2));
+
+	       assertTrue(game.isWinnerX());
+	       assertFalse(game.isWinnerO());
+	   }
+	   
+	   @Test
+	   public void test0WinsTheGameInDiagonal() {
+	       Ternilapili game = new Ternilapili();
+	       
+	       game.putXat(new Position(2, 1));
+	       game.putOat(new Position(0, 0));
+	       game.putXat(new Position(1, 0));
+	       game.putOat(new Position(1, 1));
+	       game.putXat(new Position(1, 2));
+	       game.putOat(new Position(2, 2));
+
+	       assertFalse(game.isWinnerX());
+	       assertTrue(game.isWinnerO());
+	   }
 }

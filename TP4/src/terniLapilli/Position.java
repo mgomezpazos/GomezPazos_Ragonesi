@@ -9,6 +9,9 @@ public class Position {
 
 	public Position(int i, int j) {
 
+		if (i >= 3 || j >= 3 && i < 0 || j < 0) {
+			throw new RuntimeException(Ternilapili.PleaseCheckTheLimits);
+		}
 		row = i;
 
 		column = j;
