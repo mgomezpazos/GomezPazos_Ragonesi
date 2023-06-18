@@ -17,6 +17,19 @@ public class Position {
 		column = j;
 
 	}
+	
+	public static int SlidingDistanceCalculator(Position inicialPosition, Position finalPosition) {
+		int rowDistance = Math.abs(inicialPosition.getRow()-finalPosition.getRow());
+		int colDistance = Math.abs(inicialPosition.getColum()-finalPosition.getColum());
+		if (rowDistance == colDistance) {
+			return rowDistance;
+		}
+		
+		if (Position.SlidingDistanceCalculator(inicialPosition, finalPosition) != 1) {
+			throw new RuntimeException("Move not valid");
+		}
+		return Math.max(rowDistance, colDistance);
+	}
 
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -40,6 +53,11 @@ public class Position {
 
 		return row;
 
+	}
+	
+	public int getColum() {
+		
+		return column;
 	}
 
 }

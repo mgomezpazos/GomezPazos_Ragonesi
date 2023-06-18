@@ -85,12 +85,12 @@ public class Over extends GameStatus {
 		throw new RuntimeException(GameOver);
 	}
 
-	public void moveX(Position initialPosition, Position finalPosition, Set<Position> Xs, Set<Position> Os,
+	public void slideX(Position initialPosition, Position finalPosition, Set<Position> Xs, Set<Position> Os,
 			Player turn) {
 		throw new RuntimeException(GameOver);
 	}
 
-	public void moveO(Position initialPosition, Position finalPosition, Set<Position> Xs, Set<Position> Os,
+	public void slideO(Position initialPosition, Position finalPosition, Set<Position> Xs, Set<Position> Os,
 			Player turn) {
 		throw new RuntimeException(GameOver);
 	}

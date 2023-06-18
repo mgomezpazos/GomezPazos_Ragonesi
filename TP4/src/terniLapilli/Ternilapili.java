@@ -13,10 +13,12 @@ public class Ternilapili {
 
 	public Set<Position> Xs;
 	public Set<Position> Os;
+	
 
 	public Ternilapili() {
 		Xs = new HashSet<>();
 		Os = new HashSet<>();
+		gameStatus = new Putting();
 	}
 
 	public Set<Position> getXs() {
@@ -26,8 +28,22 @@ public class Ternilapili {
 	public Set<Position> getOs() {
 		return Os;
 	}
+	
+	
+	public GameStatus statusSetter() {
+		if (Os.size()== 3) {
+			return gameStatus = new Sliding();
+		}
+		if (this.isWinnerO()|| this.isWinnerX()) {
+			return gameStatus = new Over();
+		}
+		return gameStatus;
+		
+	}
 
 	public void putXat(Position position) {
+		gameStatus = statusSetter();
+		
 		if (turno.isPlayingO()) {
 			throw new RuntimeException(NotYourTurn);
 		}
@@ -63,14 +79,48 @@ public class Ternilapili {
 		if ((position.row) >= 3 || (position.column) >= 3 && (position.row) < 0 || (position.column) < 0) {
 			throw new RuntimeException(PleaseCheckTheLimits);
 		}
-//		if (Os.size() >= 3) {
-//			throw new RuntimeException("You cunt, you already have 3 pieces!");
-//		}
-
 		Os.add(position);
-//		turn = "X";
 		turno = turno.playsX();
 	}
+	
+	public void slideX(Position initialPosition, Position finalPosition) {
+		
+		if (turno.isPlayingO()) {
+			throw new RuntimeException(NotYourTurn);
+		}
+		if (!Xs.contains(initialPosition)) {
+			throw new RuntimeException("No piece is placed at the inicial position");
+		}
+		if (Xs.contains(finalPosition)) {
+			throw new RuntimeException(Ternilapili.ThatCellIsTaken);
+		}
+		if (Position.SlidingDistanceCalculator(initialPosition, finalPosition)!= 1) {
+			throw new RuntimeException("This move is not valid!");
+		}
+		Xs.remove(initialPosition);
+		Xs.add(finalPosition);
+		turno = turno.playsO();
+		
+	}
+
+	public void slideO(Position initialPosition, Position finalPosition) {
+		if (turno.isPlayingX()) {
+			throw new RuntimeException(NotYourTurn);
+		}
+		if (!Os.contains(initialPosition)) {
+			throw new RuntimeException("No piece is placed at the inicial position");
+		}
+
+		if (Os.contains(finalPosition)) {
+			throw new RuntimeException(Ternilapili.ThatCellIsTaken);
+		}
+		if (Position.SlidingDistanceCalculator(initialPosition, finalPosition)!= 1) {
+			throw new RuntimeException("This move is not valid!");
+		}
+		Os.remove(initialPosition);
+		Os.add(finalPosition);
+		turno = turno.playsX();
+		}
 
 	public boolean isWinnerX() {
 		return XhasCompletedRow() || XhasCompletedColumn() || XhasCompletedDiagonal();

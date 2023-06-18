@@ -6,35 +6,22 @@ import org.junit.Test;
 public class TernilapiliTest {
 
 	@Test
-	public void testCreatesBoard() {
+	public void test00CreatesBoard() {
 		Ternilapili juego = new Ternilapili();
 		assertNotNull(juego);
 	}
 
 	@Test
-	public void testCreatesEmptyBoard() {
+	public void test01CreatesEmptyBoard() {
 		Ternilapili juego = new Ternilapili();
 		assertTrue(juego.isEmpty());
 	}
-
-	public void testPutsPieceOutOfTheBoard() {
+	
+	@Test
+	public void test02PutsPieceOutOfTheBoard() {
 		Ternilapili juego = new Ternilapili();
-		Position position = new Position(3, 1); 
-
 		try {
-			juego.putXat(position);
-			fail("Expected RuntimeException was not thrown.");
-		} catch (RuntimeException e) {
-			assertEquals("Please check the limits", e.getMessage());
-		}
-	}
-
-	public void testPutsPieceOutOfTheBoardInNegatives() {
-		Ternilapili juego = new Ternilapili();
-		Position position = new Position(-4, -1); 
-
-		try {
-			juego.putXat(position);
+			juego.putXat(new Position(3, 1));
 			fail("Expected RuntimeException was not thrown.");
 		} catch (RuntimeException e) {
 			assertEquals("Please check the limits", e.getMessage());
@@ -42,7 +29,18 @@ public class TernilapiliTest {
 	}
 
 	@Test
-	public void testPutXAtAGivenPosition() {
+	public void test03PutsPieceOutOfTheBoardInNegatives() {
+		Ternilapili juego = new Ternilapili();
+		try {
+			juego.putXat(new Position(-4, -1));
+			fail("Expected RuntimeException was not thrown.");
+		} catch (RuntimeException e) {
+			assertEquals("Please check the limits", e.getMessage());
+		}
+	}
+
+	@Test
+	public void test04PutXAtAGivenPosition() {
 		Ternilapili juego = new Ternilapili();
 		Position position = new Position(1, 1); 
 
@@ -53,7 +51,7 @@ public class TernilapiliTest {
 	}
 
 	@Test
-	public void testXIsTheFirstoneToPlay() {
+	public void test05XIsTheFirstoneToPlay() {
 		Ternilapili juego = new Ternilapili();
 		Position position = new Position(1, 1); 
 		try {
@@ -65,7 +63,7 @@ public class TernilapiliTest {
 	}
 
 	@Test
-	public void testPutOAtAGivenPosition() {
+	public void test06PutOAtAGivenPosition() {
 		Ternilapili juego = new Ternilapili();
 		Position positionX = new Position(1, 0); 
 		Position positionO = new Position(1, 2); 
@@ -80,7 +78,7 @@ public class TernilapiliTest {
 	}
 
 	@Test
-	public void testXPlays2Times() {
+	public void test07XPlays2Times() {
 		Ternilapili juego = new Ternilapili();
 		Position position1 = new Position(1, 0); 
 		Position position2 = new Position(1, 2); 
@@ -96,7 +94,7 @@ public class TernilapiliTest {
 	}
 
 	@Test
-	public void testOPlays2Times() {
+	public void test08OPlays2Times() {
 		Ternilapili juego = new Ternilapili();
 		Position positionX = new Position(0, 0);
 		Position positionO = new Position(1, 0); 
@@ -113,7 +111,7 @@ public class TernilapiliTest {
 	}
 
 	@Test
-	public void testTriesToPutPieceInOccupiedCell() {
+	public void test09TriesToPutPieceInOccupiedCell() {
 		Ternilapili juego = new Ternilapili();
 		Position position = new Position(0, 0); 
 
@@ -127,7 +125,7 @@ public class TernilapiliTest {
 	}
 
 	@Test
-	public void testXHasNoMoreThan3Pieces() {
+	public void test10XHasNoMoreThan3Pieces() {
 		Ternilapili juego = new Ternilapili(); 
 		juego.putXat(new Position(0, 0));
 		juego.putOat(new Position(0, 2));
@@ -143,7 +141,8 @@ public class TernilapiliTest {
 		}
 	}
 	
-	@Test public void testNobodyWonYet() {
+	@Test 
+	public void test11NobodyWonYet() {
 		   Ternilapili game = new Ternilapili();
 
 		   game.putXat( new Position( 1, 1 ));
@@ -157,7 +156,7 @@ public class TernilapiliTest {
 	   }
 	   
 	   @Test
-	   public void testXWinsTheGameInStraightLine() {
+	   public void test12XWinsTheGameInStraightLine() {
 	       Ternilapili game = new Ternilapili();
 	       game.putXat(new Position(0, 0));
 	       game.putOat(new Position(2, 1));
@@ -170,7 +169,7 @@ public class TernilapiliTest {
 	   }
 	   
 	   @Test
-	   public void test0WinsTheGameInStraightLine() {
+	   public void test130WinsTheGameInStraightLine() {
 	       Ternilapili game = new Ternilapili();
 	       game.putXat(new Position(2, 1));
 	       game.putOat(new Position(0, 0));
@@ -184,7 +183,7 @@ public class TernilapiliTest {
 	   }
 	
 	   @Test
-	   public void testXWinsTheGameInDiagonal() {
+	   public void test14XWinsTheGameInDiagonal() {
 	       Ternilapili game = new Ternilapili();
 	       game.putXat(new Position(0, 0));
 	       game.putOat(new Position(0, 1));
@@ -197,7 +196,7 @@ public class TernilapiliTest {
 	   }
 	   
 	   @Test
-	   public void test0WinsTheGameInDiagonal() {
+	   public void test150WinsTheGameInDiagonal() {
 	       Ternilapili game = new Ternilapili();
 	       
 	       game.putXat(new Position(2, 1));
@@ -209,5 +208,21 @@ public class TernilapiliTest {
 
 	       assertFalse(game.isWinnerX());
 	       assertTrue(game.isWinnerO());
+	   }
+	   
+	   @Test
+	   public void test16SlidingFromX() {
+		   Ternilapili game = new Ternilapili();
+		   
+		   game.putXat(new Position(0, 0));
+	       game.putOat(new Position(1, 0));
+	       game.putXat(new Position(2, 0));
+	       game.putOat(new Position(2, 2));
+	       game.putXat(new Position(1, 2));
+	       game.putOat(new Position(0, 2));
+	       game.slideX(new Position(0,0), new Position(1,1));
+	       assertTrue(game.getXs().contains(new Position(1,1)));
+	       assertFalse(game.getXs().contains(new Position(0,0)));
+	       
 	   }
 }
