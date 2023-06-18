@@ -24,10 +24,6 @@ public class Position {
 		if (rowDistance == colDistance) {
 			return rowDistance;
 		}
-		
-		if (Position.SlidingDistanceCalculator(inicialPosition, finalPosition) != 1) {
-			throw new RuntimeException("Move not valid");
-		}
 		return Math.max(rowDistance, colDistance);
 	}
 

@@ -18,7 +18,7 @@ public class Putting extends GameStatus {
 		if ((position.row) > 3 || (position.column) > 3 && (position.row) < 0 || (position.column) < 0) {
 			throw new RuntimeException(Ternilapili.PleaseCheckTheLimits);
 		}
-		if (Xs.size() > 3) {
+		if (Xs.size() >= 3) {
 			throw new RuntimeException(Ternilapili.NoPiecesLeft);
 		}
 

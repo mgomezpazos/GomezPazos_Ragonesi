@@ -7,6 +7,7 @@ public class Ternilapili {
 	public static final String PleaseCheckTheLimits = "Please check the limits";
 	public static final String ThatCellIsTaken = "That cell is taken";
 	public static final String NotYourTurn = "Not your turn";
+	public static final String NoPieceAtInitialPosition = "No piece is placed at the inicial position";
 
 	public GameStatus gameStatus;
 	public Player turno = new PlayerX();
