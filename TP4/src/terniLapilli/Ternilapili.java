@@ -14,7 +14,6 @@ public class Ternilapili {
 
 	public Set<Position> Xs;
 	public Set<Position> Os;
-	
 
 	public Ternilapili() {
 		Xs = new HashSet<>();
@@ -29,99 +28,38 @@ public class Ternilapili {
 	public Set<Position> getOs() {
 		return Os;
 	}
-	
-	
+
 	public GameStatus statusSetter() {
-		if (Os.size()== 3) {
+		if ((Os.size() == 3 && Xs.size()== 3)&&(!(isWinnerX()|| isWinnerO()))) {
 			return gameStatus = new Sliding();
 		}
-		if (this.isWinnerO()|| this.isWinnerX()) {
+		if ((isWinnerO() || isWinnerX())&& (Os.size() == 3 && Xs.size()== 3)) {
 			return gameStatus = new Over();
 		}
 		return gameStatus;
-		
+
 	}
 
 	public void putXat(Position position) {
+		gameStatus.putXat(position, Xs, Os, turno);
 		gameStatus = statusSetter();
-		
-		if (turno.isPlayingO()) {
-			throw new RuntimeException(NotYourTurn);
-		}
-		if (Xs.contains(position)) {
-			throw new RuntimeException(ThatCellIsTaken);
-		}
-		if (Os.contains(position)) {
-			throw new RuntimeException(ThatCellIsTaken);
-		}
-		if ((position.row) >= 3 || (position.column) >= 3 && (position.row) < 0 || (position.column) < 0) {
-			throw new RuntimeException(PleaseCheckTheLimits);
-		}
-		if (Xs.size() >= 3) {
-			throw new RuntimeException(NoPiecesLeft);
-		}
-
-		Xs.add(position);
-//		turn = "O";
-		turno = turno.playsO();
-
 	}
 
 	public void putOat(Position position) {
-		if (turno.isPlayingX()) {
-			throw new RuntimeException(NotYourTurn);
-		}
-		if (Xs.contains(position)) {
-			throw new RuntimeException(ThatCellIsTaken);
-		}
-		if (Os.contains(position)) {
-			throw new RuntimeException(ThatCellIsTaken);
-		}
-		if ((position.row) >= 3 || (position.column) >= 3 && (position.row) < 0 || (position.column) < 0) {
-			throw new RuntimeException(PleaseCheckTheLimits);
-		}
-		Os.add(position);
-		turno = turno.playsX();
+		gameStatus.putOat(position, Xs, Os, turno);
+		gameStatus = statusSetter();
 	}
-	
+
 	public void slideX(Position initialPosition, Position finalPosition) {
 		
-		if (turno.isPlayingO()) {
-			throw new RuntimeException(NotYourTurn);
-		}
-		if (!Xs.contains(initialPosition)) {
-			throw new RuntimeException("No piece is placed at the inicial position");
-		}
-		if (Xs.contains(finalPosition)) {
-			throw new RuntimeException(Ternilapili.ThatCellIsTaken);
-		}
-		if (Position.SlidingDistanceCalculator(initialPosition, finalPosition)!= 1) {
-			throw new RuntimeException("This move is not valid!");
-		}
-		Xs.remove(initialPosition);
-		Xs.add(finalPosition);
-		turno = turno.playsO();
-		
+		gameStatus.slideX(initialPosition, finalPosition, Xs, Os, turno);
+		gameStatus = statusSetter();
 	}
 
 	public void slideO(Position initialPosition, Position finalPosition) {
-		if (turno.isPlayingX()) {
-			throw new RuntimeException(NotYourTurn);
-		}
-		if (!Os.contains(initialPosition)) {
-			throw new RuntimeException("No piece is placed at the inicial position");
-		}
-
-		if (Os.contains(finalPosition)) {
-			throw new RuntimeException(Ternilapili.ThatCellIsTaken);
-		}
-		if (Position.SlidingDistanceCalculator(initialPosition, finalPosition)!= 1) {
-			throw new RuntimeException("This move is not valid!");
-		}
-		Os.remove(initialPosition);
-		Os.add(finalPosition);
-		turno = turno.playsX();
-		}
+		gameStatus.slideO(initialPosition, finalPosition, Xs, Os, turno);
+		gameStatus = statusSetter();
+	}
 
 	public boolean isWinnerX() {
 		return XhasCompletedRow() || XhasCompletedColumn() || XhasCompletedDiagonal();
@@ -194,7 +132,7 @@ public class Ternilapili {
 
 		return diagonal1 || diagonal2;
 	}
-	
+
 	public boolean isEmpty() {
 		return (Xs.size() == 0) && (Os.size() == 0);
 	}

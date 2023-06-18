@@ -52,19 +52,7 @@ public class TernilapiliTest {
 	}
 
 	@Test
-	public void test05XIsTheFirstoneToPlay() {
-		Ternilapili juego = new Ternilapili();
-		Position position = new Position(1, 1);
-		try {
-			juego.putOat(position);
-			fail("Expected RuntimeException was not thrown.");
-		} catch (RuntimeException e) {
-			assertEquals("Not your turn", e.getMessage());
-		}
-	}
-
-	@Test
-	public void test06PutOAtAGivenPosition() {
+	public void test05PutOAtAGivenPosition() {
 		Ternilapili juego = new Ternilapili();
 		Position positionX = new Position(1, 0);
 		Position positionO = new Position(1, 2);
@@ -76,6 +64,18 @@ public class TernilapiliTest {
 		assertEquals(1, juego.getOs().size());
 		assertTrue(juego.getXs().contains(positionX));
 		assertTrue(juego.getOs().contains(positionO));
+	}
+	
+	@Test
+	public void test06XIsTheFirstoneToPlay() {
+		Ternilapili juego = new Ternilapili();
+		Position position = new Position(1, 1);
+		try {
+			juego.putOat(position);
+			fail("Expected RuntimeException was not thrown.");
+		} catch (RuntimeException e) {
+			assertEquals("Not your turn", e.getMessage());
+		}
 	}
 
 	@Test
@@ -111,7 +111,7 @@ public class TernilapiliTest {
 	}
 
 	@Test
-	public void test09TriesToPutPieceInOccupiedCell() {
+	public void test09OTriesToPutPieceInOccupiedCell() {
 		Ternilapili juego = new Ternilapili();
 		Position position = new Position(0, 0);
 
@@ -123,9 +123,23 @@ public class TernilapiliTest {
 			assertEquals("That cell is taken", e.getMessage());
 		}
 	}
+	
+	@Test
+	public void test10XTriesToPutPieceInOccupiedCell() {
+		Ternilapili juego = new Ternilapili();
+		
+		juego.putXat(new Position(0,0));
+		juego.putOat(new Position(1,0));
+		try {
+			juego.putXat(new Position(1,0));
+			fail("Expected RuntimeException was not thrown.");
+		} catch (RuntimeException e) {
+			assertEquals("That cell is taken", e.getMessage());
+		}
+	}
 
 	@Test
-	public void test10XHasNoMoreThan3Pieces() {
+	public void test11XHasNoMoreThan3Pieces() {
 		Ternilapili juego = new Ternilapili();
 		juego.putXat(new Position(0, 0));
 		juego.putOat(new Position(0, 2));
@@ -137,181 +151,285 @@ public class TernilapiliTest {
 			juego.putXat(new Position(2, 0));
 			fail("Expected RuntimeException was not thrown.");
 		} catch (RuntimeException e) {
-			assertEquals("You have no pieces left", e.getMessage());
+			assertEquals("Cannot put pieces, only moving allowed", e.getMessage());
 		}
 	}
+	
 
 	@Test
-	public void test11NobodyWonYet() {
-		Ternilapili game = new Ternilapili();
+	public void test12NobodyWonYet() {
+		Ternilapili juego = new Ternilapili();
+		
+		juego.putXat(new Position(0, 0));
+		juego.putOat(new Position(1, 0));
+		juego.putXat(new Position(2, 0));
+		juego.putOat(new Position(2, 1));
+		juego.putXat(new Position(1, 2));
+		juego.putOat(new Position(0, 2));
 
-		game.putXat(new Position(1, 1));
-		game.putOat(new Position(2, 2));
-		game.putXat(new Position(0, 0));
-		game.putOat(new Position(1, 2));
-
-		assertFalse(game.isWinnerX());
-		assertFalse(game.isWinnerO());
+		assertFalse(juego.isWinnerX());
+		assertFalse(juego.isWinnerO());
 
 	}
 
 	@Test
-	public void test12XWinsTheGameInStraightLine() {
-		Ternilapili game = new Ternilapili();
-		game.putXat(new Position(0, 0));
-		game.putOat(new Position(2, 1));
-		game.putXat(new Position(1, 0));
-		game.putOat(new Position(1, 1));
-		game.putXat(new Position(2, 0));
+	public void test13XWinsTheGameInRow() {
+		Ternilapili juego = new Ternilapili();
+		juego.putXat(new Position(0, 0));
+		juego.putOat(new Position(1, 0));
+		juego.putXat(new Position(0, 1));
+		juego.putOat(new Position(2, 0));
+		juego.putXat(new Position(0, 2));
 
-		assertTrue(game.isWinnerX());
-		assertFalse(game.isWinnerO());
+		assertTrue(juego.isWinnerX());
+		assertFalse(juego.isWinnerO());
 	}
 
 	@Test
-	public void test130WinsTheGameInStraightLine() {
-		Ternilapili game = new Ternilapili();
-		game.putXat(new Position(2, 1));
-		game.putOat(new Position(0, 0));
-		game.putXat(new Position(1, 1));
-		game.putOat(new Position(1, 0));
-		game.putXat(new Position(1, 2));
-		game.putOat(new Position(2, 0));
+	public void test14OWinsTheGameInRow() {
+		Ternilapili juego = new Ternilapili();
+		juego.putXat(new Position(2, 0));
+		juego.putOat(new Position(0, 0));
+		juego.putXat(new Position(1, 0));
+		juego.putOat(new Position(0, 1));
+		juego.putXat(new Position(2, 2));
+		juego.putOat(new Position(0, 2));
 
-		assertFalse(game.isWinnerX());
-		assertTrue(game.isWinnerO());
+		assertFalse(juego.isWinnerX());
+		assertTrue(juego.isWinnerO());
+	}
+	
+	@Test
+	public void test15XWinsTheGameInColumn() {
+		Ternilapili juego = new Ternilapili();
+		juego.putXat(new Position(0, 0));
+		juego.putOat(new Position(0, 1));
+		juego.putXat(new Position(1, 0));
+		juego.putOat(new Position(0, 2));
+		juego.putXat(new Position(2, 0));
+
+		assertTrue(juego.isWinnerX());
+		assertFalse(juego.isWinnerO());
 	}
 
 	@Test
-	public void test14XWinsTheGameInDiagonal() {
-		Ternilapili game = new Ternilapili();
-		game.putXat(new Position(0, 0));
-		game.putOat(new Position(0, 1));
-		game.putXat(new Position(1, 1));
-		game.putOat(new Position(1, 0));
-		game.putXat(new Position(2, 2));
+	public void test16OWinsTheGameInColumn() {
+		Ternilapili juego = new Ternilapili();
+		juego.putXat(new Position(0, 2));
+		juego.putOat(new Position(0, 0));
+		juego.putXat(new Position(0, 1));
+		juego.putOat(new Position(1, 0));
+		juego.putXat(new Position(2, 2));
+		juego.putOat(new Position(2, 0));
 
-		assertTrue(game.isWinnerX());
-		assertFalse(game.isWinnerO());
+		assertFalse(juego.isWinnerX());
+		assertTrue(juego.isWinnerO());
 	}
 
 	@Test
-	public void test150WinsTheGameInDiagonal() {
-		Ternilapili game = new Ternilapili();
+	public void test17XWinsTheGameInDiagonal() {
+		Ternilapili juego = new Ternilapili();
+		juego.putXat(new Position(0, 0));
+		juego.putOat(new Position(0, 2));
+		juego.putXat(new Position(1, 1));
+		juego.putOat(new Position(2, 0));
+		juego.putXat(new Position(2, 2));
 
-		game.putXat(new Position(2, 1));
-		game.putOat(new Position(0, 0));
-		game.putXat(new Position(1, 0));
-		game.putOat(new Position(1, 1));
-		game.putXat(new Position(1, 2));
-		game.putOat(new Position(2, 2));
-
-		assertFalse(game.isWinnerX());
-		assertTrue(game.isWinnerO());
+		assertTrue(juego.isWinnerX());
+		assertFalse(juego.isWinnerO());
 	}
 
 	@Test
-	public void test16SlidingFromX() {
-		Ternilapili game = new Ternilapili();
+	public void test18OWinsTheGameInDiagonal() {
+		Ternilapili juego = new Ternilapili();
 
-		game.putXat(new Position(0, 0));
-		game.putOat(new Position(1, 0));
-		game.putXat(new Position(2, 0));
-		game.putOat(new Position(2, 2));
-		game.putXat(new Position(1, 2));
-		game.putOat(new Position(0, 2));
-		game.slideX(new Position(0, 0), new Position(1, 1));
-		assertTrue(game.getXs().contains(new Position(1, 1)));
-		assertFalse(game.getXs().contains(new Position(0, 0)));
+		juego.putXat(new Position(1, 0));
+		juego.putOat(new Position(0, 0));
+		juego.putXat(new Position(2, 0));
+		juego.putOat(new Position(1, 1));
+		juego.putXat(new Position(0, 2));
+		juego.putOat(new Position(2, 2));
 
+		assertFalse(juego.isWinnerX());
+		assertTrue(juego.isWinnerO());
 	}
 
 	@Test
-	public void test17SlidingFromO() {
-		Ternilapili game = new Ternilapili();
+	public void test19SlidingFromX() {
+		Ternilapili juego = new Ternilapili();
 
-		game.putXat(new Position(0, 0));
-		game.putOat(new Position(1, 0));
-		game.putXat(new Position(2, 0));
-		game.putOat(new Position(2, 2));
-		game.putXat(new Position(1, 2));
-		game.putOat(new Position(0, 2));
-		game.slideX(new Position(0, 0), new Position(1, 1));
-		game.slideO(new Position(1, 0), new Position(2, 1));
-		assertTrue(game.getOs().contains(new Position(2, 1)));
-		assertFalse(game.getOs().contains(new Position(1, 0)));
+		juego.putXat(new Position(0, 0));
+		juego.putOat(new Position(1, 0));
+		juego.putXat(new Position(2, 0));
+		juego.putOat(new Position(2, 2));
+		juego.putXat(new Position(1, 2));
+		juego.putOat(new Position(0, 2));
+		juego.slideX(new Position(0, 0), new Position(1, 1));
+		assertTrue(juego.getXs().contains(new Position(1, 1)));
+		assertFalse(juego.getXs().contains(new Position(0, 0)));
 
 	}
 
 	@Test
-	public void test18XSlidesOutOfLimit() {
-		Ternilapili game = new Ternilapili();
+	public void test20SlidingFromO() {
+		Ternilapili juego = new Ternilapili();
 
-		game.putXat(new Position(0, 0));
-		game.putOat(new Position(1, 0));
-		game.putXat(new Position(2, 0));
-		game.putOat(new Position(2, 2));
-		game.putXat(new Position(1, 2));
-		game.putOat(new Position(0, 2));
+		juego.putXat(new Position(0, 0));
+		juego.putOat(new Position(1, 0));
+		juego.putXat(new Position(2, 0));
+		juego.putOat(new Position(2, 2));
+		juego.putXat(new Position(1, 2));
+		juego.putOat(new Position(0, 2));
+		juego.slideX(new Position(0, 0), new Position(1, 1));
+		juego.slideO(new Position(1, 0), new Position(2, 1));
+		assertTrue(juego.getOs().contains(new Position(2, 1)));
+		assertFalse(juego.getOs().contains(new Position(1, 0)));
+
+	}
+
+	@Test
+	public void test21XSlidesOutOfLimit() {
+		Ternilapili juego = new Ternilapili();
+
+		juego.putXat(new Position(0, 0));
+		juego.putOat(new Position(1, 0));
+		juego.putXat(new Position(2, 0));
+		juego.putOat(new Position(2, 2));
+		juego.putXat(new Position(1, 2));
+		juego.putOat(new Position(0, 2));
 		try {
-			game.slideX(new Position(0, 0), new Position(2, 1));
+			juego.slideX(new Position(0, 0), new Position(3, 1));
 			fail("Expected RuntimeException was not thrown");
 		} catch (RuntimeException e) {
-			assertEquals("This move is not valid!", e.getMessage());
+			assertEquals("Please check the limits", e.getMessage());
 		}
 	}
 
 	@Test
-	public void test190SlidesOutOfLimit() {
-		Ternilapili game = new Ternilapili();
+	public void test22OSlidesOutOfLimit() {
+		Ternilapili juego = new Ternilapili();
 
-		game.putXat(new Position(0, 0));
-		game.putOat(new Position(1, 0));
-		game.putXat(new Position(2, 0));
-		game.putOat(new Position(2, 1));
-		game.putXat(new Position(1, 2));
-		game.putOat(new Position(0, 2));
-		game.slideX(new Position(0, 0), new Position(1, 1));
-		
+		juego.putXat(new Position(0, 0));
+		juego.putOat(new Position(1, 0));
+		juego.putXat(new Position(2, 0));
+		juego.putOat(new Position(2, 1));
+		juego.putXat(new Position(1, 2));
+		juego.putOat(new Position(0, 2));
+		juego.slideX(new Position(0, 0), new Position(1, 1));
+
 		try {
-			game.slideO(new Position(1, 0), new Position(2, 2));
+			juego.slideO(new Position(1, 0), new Position(3, 2));
 			fail("Expected RuntimeExeption was not thrown");
 		} catch (RuntimeException e) {
-			assertEquals("This move is not valid!", e.getMessage());
+			assertEquals("Please check the limits", e.getMessage());
 		}
 	}
-	// ESTE TEST ANDA MAL SI PASO UNA X A UNA POSICION OCUPADA POR UNA O, NO TIRA EL ERROR
-	@Test
-	public void test20XSlidesToAnOccupiedCell() {
-		Ternilapili game = new Ternilapili();
 
-		game.putXat(new Position(0, 0));
-		game.putOat(new Position(2, 0));
-		game.putXat(new Position(1, 0));
-		game.putOat(new Position(2, 2));
-		game.putXat(new Position(1, 2));
-		game.putOat(new Position(0, 1));
+	@Test
+	public void test23XSlidesToAnOccupiedCellByO() {
+		Ternilapili juego = new Ternilapili();
+
+		juego.putXat(new Position(0, 0));
+		juego.putOat(new Position(2, 0));
+		juego.putXat(new Position(1, 0));
+		juego.putOat(new Position(2, 2));
+		juego.putXat(new Position(1, 2));
+		juego.putOat(new Position(0, 1));
 		try {
-			game.slideX(new Position(0, 0), new Position(0,1));
+			juego.slideX(new Position(0, 0), new Position(0, 1));
+			fail("Expected RuntimeException was not thrown");
+		} catch (RuntimeException e) {
+			assertEquals(Ternilapili.ThatCellIsTaken, e.getMessage());
+		}
+	}
+
+	@Test
+	public void test24XSlidesToAnOccupiedCellByX() {
+		Ternilapili juego = new Ternilapili();
+
+		juego.putXat(new Position(0, 0));
+		juego.putOat(new Position(2, 0));
+		juego.putXat(new Position(1, 0));
+		juego.putOat(new Position(2, 2));
+		juego.putXat(new Position(1, 2));
+		juego.putOat(new Position(0, 1));
+		try {
+			juego.slideX(new Position(0, 0), new Position(1, 0));
 			fail("Expected RuntimeException was not thrown");
 		} catch (RuntimeException e) {
 			assertEquals(Ternilapili.ThatCellIsTaken, e.getMessage());
 		}
 	}
 	
-	//ESTE SI PASO EL DE ARRIBA NO
 	@Test
-	public void test21XTriesToSlideBeforePutting() {
-		Ternilapili game = new Ternilapili();
+	public void test25OSlidesToAnOccupiedCellByX() {
+		Ternilapili juego = new Ternilapili();
 
-		game.putXat(new Position(0, 0));
-		game.putOat(new Position(2, 0));
-		game.putXat(new Position(1, 0));
-		game.putOat(new Position(2, 2));
-		game.putXat(new Position(1, 2));
-		game.putOat(new Position(0, 1));
+		juego.putXat(new Position(0, 0));
+		juego.putOat(new Position(2, 0));
+		juego.putXat(new Position(1, 0));
+		juego.putOat(new Position(2, 2));
+		juego.putXat(new Position(2, 1));
+		juego.putOat(new Position(0, 1));
+		juego.slideX(new Position(0, 0), new Position(1, 1));
 		try {
-			game.slideX(new Position(2, 1), new Position(1,1));
+			juego.slideO(new Position(2, 0), new Position(2, 1));
+			fail("Expected RuntimeException was not thrown");
+		} catch (RuntimeException e) {
+			assertEquals(Ternilapili.ThatCellIsTaken, e.getMessage());
+		}
+	}
+	
+	@Test
+	public void test26OSlidesToAnOccupiedCellByO() {
+		Ternilapili juego = new Ternilapili();
+
+		juego.putXat(new Position(0, 0));
+		juego.putOat(new Position(1, 1));
+		juego.putXat(new Position(2, 2));
+		juego.putOat(new Position(2, 0));
+		juego.putXat(new Position(0, 2));
+		juego.putOat(new Position(0, 1));
+		juego.slideX(new Position(0, 0), new Position(1, 0));
+		try {
+			juego.slideO(new Position(2, 0), new Position(1, 1));
+			fail("Expected RuntimeException was not thrown");
+		} catch (RuntimeException e) {
+			assertEquals(Ternilapili.ThatCellIsTaken, e.getMessage());
+		}
+	}
+	
+	@Test
+	public void test27XTriesToSlideBeforePutting() {
+		Ternilapili juego = new Ternilapili();
+
+		juego.putXat(new Position(0, 0));
+		juego.putOat(new Position(2, 0));
+		juego.putXat(new Position(1, 0));
+		juego.putOat(new Position(2, 2));
+		juego.putXat(new Position(1, 2));
+		juego.putOat(new Position(0, 1));
+		try {
+			juego.slideX(new Position(2, 1), new Position(1, 1));
+			fail("Expected RuntimeException was not thrown");
+		} catch (RuntimeException e) {
+			assertEquals(Ternilapili.NoPieceAtInitialPosition, e.getMessage());
+		}
+	}
+
+	@Test
+	public void test28OTriesToSlideBeforePutting() {
+		Ternilapili juego = new Ternilapili();
+
+		juego.putXat(new Position(0, 0));
+		juego.putOat(new Position(2, 0));
+		juego.putXat(new Position(1, 0));
+		juego.putOat(new Position(2, 2));
+		juego.putXat(new Position(1, 2));
+		juego.putOat(new Position(0, 1));
+		juego.slideX(new Position(1, 2), new Position(0, 2));
+		try {
+			juego.slideO(new Position(0, 2), new Position(2, 1));
 			fail("Expected RuntimeException was not thrown");
 		} catch (RuntimeException e) {
 			assertEquals(Ternilapili.NoPieceAtInitialPosition, e.getMessage());
@@ -319,21 +437,41 @@ public class TernilapiliTest {
 	}
 	
 	@Test
-	public void test22XTriesToSlideBeforePutting() {
-		Ternilapili game = new Ternilapili();
+	public void test29XSlidesADistanceBiggerThanOne() {
+		Ternilapili juego = new Ternilapili();
 
-		game.putXat(new Position(0, 0));
-		game.putOat(new Position(2, 0));
-		game.putXat(new Position(1, 0));
-		game.putOat(new Position(2, 2));
-		game.putXat(new Position(1, 2));
-		game.putOat(new Position(0, 1));
-		game.slideX(new Position(0, 0), new Position(1, 1));
+		juego.putXat(new Position(0, 0));
+		juego.putOat(new Position(1, 0));
+		juego.putXat(new Position(2, 0));
+		juego.putOat(new Position(2, 2));
+		juego.putXat(new Position(1, 2));
+		juego.putOat(new Position(0, 2));
 		try {
-			game.slideO(new Position(0,2), new Position(2,1));
+			juego.slideX(new Position(0, 0), new Position(2, 1));
 			fail("Expected RuntimeException was not thrown");
 		} catch (RuntimeException e) {
-			assertEquals(Ternilapili.NoPieceAtInitialPosition, e.getMessage());
+			assertEquals("This move is not valid!", e.getMessage());
 		}
 	}
+
+	@Test
+	public void test30OSlidesADistanceBiggerThanOne() {
+		Ternilapili juego = new Ternilapili();
+
+		juego.putXat(new Position(0, 0));
+		juego.putOat(new Position(1, 0));
+		juego.putXat(new Position(2, 0));
+		juego.putOat(new Position(2, 1));
+		juego.putXat(new Position(1, 2));
+		juego.putOat(new Position(0, 2));
+		juego.slideX(new Position(0, 0), new Position(1, 1));
+
+		try {
+			juego.slideO(new Position(1, 0), new Position(2, 2));
+			fail("Expected RuntimeExeption was not thrown");
+		} catch (RuntimeException e) {
+			assertEquals("This move is not valid!", e.getMessage());
+		}
+	}
+	
 }

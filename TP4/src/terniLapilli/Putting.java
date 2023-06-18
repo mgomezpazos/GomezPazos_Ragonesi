@@ -6,13 +6,10 @@ public class Putting extends GameStatus {
 	public Player turno = new PlayerX();
 	
 	public void putXat(Position position, Set<Position> Xs, Set<Position> Os, Player turn) {
-		if (turno.isPlayingX()) {
+		if (turno.isPlayingO()) {
 			throw new RuntimeException(Ternilapili.NotYourTurn);
 		}
-		if (Xs.contains(position)) {
-			throw new RuntimeException(Ternilapili.ThatCellIsTaken);
-		}
-		if (Os.contains(position)) {
+		if (Xs.contains(position) ||(Os.contains(position))) {
 			throw new RuntimeException(Ternilapili.ThatCellIsTaken);
 		}
 		if ((position.row) > 3 || (position.column) > 3 && (position.row) < 0 || (position.column) < 0) {
@@ -21,23 +18,25 @@ public class Putting extends GameStatus {
 		if (Xs.size() >= 3) {
 			throw new RuntimeException(Ternilapili.NoPiecesLeft);
 		}
-
 		Xs.add(position);
-		turno = turno.playsX();
+		turno = turno.playsO();
 	}
 
 	public void putOat(Position position, Set<Position> Xs, Set<Position> Os, Player turn) {
-		if (turno.isPlayingO()) {
+		if (turno.isPlayingX()) {
 			throw new RuntimeException(Ternilapili.NotYourTurn);
 		}
-		if (Xs.contains(position)) {
+		if (Xs.contains(position)||(Os.contains(position)) ) {
 			throw new RuntimeException(Ternilapili.ThatCellIsTaken);
 		}
-		if (Os.contains(position)) {
-			throw new RuntimeException(Ternilapili.ThatCellIsTaken);
+		if ((position.row) > 3 || (position.column) > 3 && (position.row) < 0 || (position.column) < 0) {
+			throw new RuntimeException(Ternilapili.PleaseCheckTheLimits);
+		}
+		if (Os.size() >= 3) {
+			throw new RuntimeException(Ternilapili.NoPiecesLeft);
 		}
 		Os.add(position);
-		turno = turno.playsO();
+		turno = turno.playsX();
 	}
 
 	public void slideX(Position initialPosition, Position finalPosition, Set<Position> Xs, Set<Position> Os,Player turn) {
