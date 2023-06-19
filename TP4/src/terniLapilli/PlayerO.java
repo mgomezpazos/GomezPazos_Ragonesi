@@ -1,5 +1,6 @@
 package terniLapilli;
-public class PlayerO extends Player{
+
+public class PlayerO extends Player {
 
 	public boolean isPlayingX() {
 		return false;

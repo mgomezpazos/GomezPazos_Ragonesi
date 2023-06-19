@@ -1,4 +1,5 @@
 package terniLapilli;
+
 import java.util.Set;
 
 public class Over extends GameStatus {

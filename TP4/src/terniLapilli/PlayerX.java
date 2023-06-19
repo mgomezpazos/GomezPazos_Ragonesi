@@ -1,6 +1,7 @@
 package terniLapilli;
-public class PlayerX extends Player{
-	
+
+public class PlayerX extends Player {
+
 	public boolean isPlayingX() {
 		return true;
 	}
@@ -13,7 +14,7 @@ public class PlayerX extends Player{
 		return new PlayerX();
 	}
 
- 	public Player playsO() {
+	public Player playsO() {
 		return new PlayerO();
 	}
 

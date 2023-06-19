@@ -1,5 +1,7 @@
 package terniLapilli;
+
 import java.util.Set;
+import java.util.stream.IntStream;
 import java.util.HashSet;
 
 public class Ternilapili {
@@ -8,6 +10,8 @@ public class Ternilapili {
 	public static final String ThatCellIsTaken = "That cell is taken";
 	public static final String NotYourTurn = "Not your turn";
 	public static final String NoPieceAtInitialPosition = "No piece is placed at the inicial position";
+	public static final String ThisMoveIsNotValid = "This move is not valid!";
+	public static final String CannotPutPiecesOnlyMovingAllowed = "Cannot put pieces, only moving allowed";
 
 	public GameStatus gameStatus;
 	public Player turno = new PlayerX();
@@ -30,10 +34,10 @@ public class Ternilapili {
 	}
 
 	public GameStatus statusSetter() {
-		if ((Os.size() == 3 && Xs.size()== 3)&&(!(isWinnerX()|| isWinnerO()))) {
+		if ((Os.size() == 3 && Xs.size() == 3) && (!(isWinnerX() || isWinnerO()))) {
 			return gameStatus = new Sliding();
 		}
-		if ((isWinnerO() || isWinnerX())&& (Os.size() == 3 && Xs.size()== 3)) {
+		if ((isWinnerO() || isWinnerX()) && (Os.size() == 3 && Xs.size() == 3)) {
 			return gameStatus = new Over();
 		}
 		return gameStatus;
@@ -51,7 +55,7 @@ public class Ternilapili {
 	}
 
 	public void slideX(Position initialPosition, Position finalPosition) {
-		
+
 		gameStatus.slideX(initialPosition, finalPosition, Xs, Os, turno);
 		gameStatus = statusSetter();
 	}
@@ -70,47 +74,23 @@ public class Ternilapili {
 	}
 
 	public boolean XhasCompletedRow() {
-		for (int iteradorFilas = 0; iteradorFilas < 3; iteradorFilas++) {
-			int filaObservable = iteradorFilas;
-			int count = (int) Xs.stream().filter(p -> p.row == filaObservable).count();
-			if (count == 3) {
-				return true;
-			}
-		}
-		return false;
+		return IntStream.range(0, 3)
+				.anyMatch(iteradorFilas -> Xs.stream().filter(p -> p.row == iteradorFilas).count() == 3);
 	}
 
 	public boolean OhasCompletedRow() {
-		for (int iteradorFilas = 0; iteradorFilas < 3; iteradorFilas++) {
-			int filaObservable = iteradorFilas;
-			int count = (int) Os.stream().filter(p -> p.row == filaObservable).count();
-			if (count == 3) {
-				return true;
-			}
-		}
-		return false;
+		return IntStream.range(0, 3)
+				.anyMatch(iteradorFilas -> Os.stream().filter(p -> p.row == iteradorFilas).count() == 3);
 	}
 
 	public boolean XhasCompletedColumn() {
-		for (int iteradorColumnas = 0; iteradorColumnas < 3; iteradorColumnas++) {
-			int columnaObservable = iteradorColumnas;
-			int count = (int) Xs.stream().filter(p -> p.column == columnaObservable).count();
-			if (count == 3) {
-				return true;
-			}
-		}
-		return false;
+		return IntStream.range(0, 3)
+				.anyMatch(iteradorColumnas -> Xs.stream().filter(p -> p.column == iteradorColumnas).count() == 3);
 	}
 
 	public boolean OhasCompletedColumn() {
-		for (int iteradorColumnas = 0; iteradorColumnas < 3; iteradorColumnas++) {
-			int columnaObservable = iteradorColumnas;
-			int count = (int) Os.stream().filter(p -> p.column == columnaObservable).count();
-			if (count == 3) {
-				return true;
-			}
-		}
-		return false;
+		return IntStream.range(0, 3)
+				.anyMatch(iteradorColumnas -> Os.stream().filter(p -> p.column == iteradorColumnas).count() == 3);
 	}
 
 	public boolean XhasCompletedDiagonal() {

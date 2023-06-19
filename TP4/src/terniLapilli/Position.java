@@ -1,4 +1,5 @@
 package terniLapilli;
+
 import java.util.Objects;
 
 public class Position {
@@ -17,10 +18,10 @@ public class Position {
 		column = j;
 
 	}
-	
+
 	public static int SlidingDistanceCalculator(Position inicialPosition, Position finalPosition) {
-		int rowDistance = Math.abs(inicialPosition.getRow()-finalPosition.getRow());
-		int colDistance = Math.abs(inicialPosition.getColum()-finalPosition.getColum());
+		int rowDistance = Math.abs(inicialPosition.getRow() - finalPosition.getRow());
+		int colDistance = Math.abs(inicialPosition.getColum() - finalPosition.getColum());
 		if (rowDistance == colDistance) {
 			return rowDistance;
 		}
@@ -50,9 +51,9 @@ public class Position {
 		return row;
 
 	}
-	
+
 	public int getColum() {
-		
+
 		return column;
 	}
 

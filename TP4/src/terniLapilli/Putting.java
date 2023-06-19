@@ -1,15 +1,16 @@
 package terniLapilli;
+
 import java.util.Set;
 
 public class Putting extends GameStatus {
 
 	public Player turno = new PlayerX();
-	
+
 	public void putXat(Position position, Set<Position> Xs, Set<Position> Os, Player turn) {
 		if (turno.isPlayingO()) {
 			throw new RuntimeException(Ternilapili.NotYourTurn);
 		}
-		if (Xs.contains(position) ||(Os.contains(position))) {
+		if (Xs.contains(position) || (Os.contains(position))) {
 			throw new RuntimeException(Ternilapili.ThatCellIsTaken);
 		}
 		if ((position.row) > 3 || (position.column) > 3 && (position.row) < 0 || (position.column) < 0) {
@@ -26,7 +27,7 @@ public class Putting extends GameStatus {
 		if (turno.isPlayingX()) {
 			throw new RuntimeException(Ternilapili.NotYourTurn);
 		}
-		if (Xs.contains(position)||(Os.contains(position)) ) {
+		if (Xs.contains(position) || (Os.contains(position))) {
 			throw new RuntimeException(Ternilapili.ThatCellIsTaken);
 		}
 		if ((position.row) > 3 || (position.column) > 3 && (position.row) < 0 || (position.column) < 0) {
@@ -39,13 +40,15 @@ public class Putting extends GameStatus {
 		turno = turno.playsX();
 	}
 
-	public void slideX(Position initialPosition, Position finalPosition, Set<Position> Xs, Set<Position> Os,Player turn) {
-		throw new RuntimeException("No piece is placed at the inicial position");
+	public void slideX(Position initialPosition, Position finalPosition, Set<Position> Xs, Set<Position> Os,
+			Player turn) {
+		throw new RuntimeException(Ternilapili.NoPieceAtInitialPosition);
 
 	}
 
-	public void slideO(Position initialPosition, Position finalPosition, Set<Position> Xs, Set<Position> Os,Player turn) {
-		throw new RuntimeException("No piece is placed at the inicial position");
+	public void slideO(Position initialPosition, Position finalPosition, Set<Position> Xs, Set<Position> Os,
+			Player turn) {
+		throw new RuntimeException(Ternilapili.NoPieceAtInitialPosition);
 
 	}
 
